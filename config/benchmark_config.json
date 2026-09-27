@@ -1,0 +1,41 @@
+{
+  "benchmark_version": "phase2-smoke-1.0",
+  "frozen_on": "2026-09-27",
+  "mode": "structured",
+  "max_output_tokens": 512,
+  "models": {
+    "openai_fast": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "none",
+      "input_usd_per_million": 0.1,
+      "output_usd_per_million": 0.5,
+      "api_key_env": "OPENAI_API_KEY"
+    },
+    "anthropic_fast": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001",
+      "thinking": "off",
+      "input_usd_per_million": 1.0,
+      "output_usd_per_million": 5.0,
+      "api_key_env": "ANTHROPIC_API_KEY"
+    },
+    "gemini_fast": {
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "thinking_level": "minimal",
+      "input_usd_per_million": 0.3,
+      "output_usd_per_million": 2.5,
+      "api_key_env": "GEMINI_API_KEY"
+    },
+    "anthropic_baseline": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "thinking": "adaptive",
+      "effort": "low",
+      "input_usd_per_million": 2.0,
+      "output_usd_per_million": 10.0,
+      "api_key_env": "ANTHROPIC_API_KEY"
+    }
+  }
+}

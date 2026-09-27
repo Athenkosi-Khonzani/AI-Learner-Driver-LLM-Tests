@@ -1,0 +1,23 @@
+{
+  "name": "phase2_smoke_coordinate_target",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 500.0,
+    "y_mm": 500.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 0.0
+  },
+  "blocks": [],
+  "user_instruction": "Drive to the coordinate (500 mm, 1000 mm) and stop there. Keep the rover inside the arena.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 500.0,
+    "target_y_mm": 1000.0,
+    "position_tolerance_mm": 25.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}
