@@ -1,0 +1,33 @@
+{
+  "name": "SINGLE_04",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 450.0,
+    "y_mm": 450.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 45.0
+  },
+  "blocks": [
+    {
+      "id": "yellow_block_01",
+      "colour": "yellow",
+      "x_mm": 1300.0,
+      "y_mm": 1300.0,
+      "length_mm": 620.0,
+      "breadth_mm": 300.0,
+      "orientation_deg": 45.0
+    }
+  ],
+  "user_instruction": "Drive to coordinate (2050 mm, 1900 mm) while avoiding the yellow block, then stop.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 2050.0,
+    "target_y_mm": 1900.0,
+    "position_tolerance_mm": 70.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "COORD_04",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 500.0,
+    "y_mm": 1900.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 180.0
+  },
+  "blocks": [],
+  "user_instruction": "Drive to coordinate (1700 mm, 1600 mm), then face west and stop.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 1700.0,
+    "target_y_mm": 1600.0,
+    "position_tolerance_mm": 60.0,
+    "require_heading": true,
+    "target_heading_deg": 270.0,
+    "heading_tolerance_deg": 10.0
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "TIGHT_06",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 350.0,
+    "y_mm": 350.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 0.0
+  },
+  "blocks": [
+    {
+      "id": "green_block_01",
+      "colour": "green",
+      "x_mm": 1200.0,
+      "y_mm": 1000.0,
+      "length_mm": 500.0,
+      "breadth_mm": 300.0,
+      "orientation_deg": 35.0
+    },
+    {
+      "id": "yellow_block_01",
+      "colour": "yellow",
+      "x_mm": 1700.0,
+      "y_mm": 1550.0,
+      "length_mm": 500.0,
+      "breadth_mm": 300.0,
+      "orientation_deg": 325.0
+    }
+  ],
+  "user_instruction": "Drive to coordinate (2100 mm, 2100 mm), face east, and stop. Avoid both blocks and keep the rover inside the arena.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 2100.0,
+    "target_y_mm": 2100.0,
+    "position_tolerance_mm": 70.0,
+    "require_heading": true,
+    "target_heading_deg": 90.0,
+    "heading_tolerance_deg": 10.0
+  }
+}

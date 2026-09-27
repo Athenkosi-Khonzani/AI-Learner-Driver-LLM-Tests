@@ -1,0 +1,60 @@
+{
+  "name": "MULTI_04",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 350.0,
+    "y_mm": 350.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 45.0
+  },
+  "blocks": [
+    {
+      "id": "red_block_01",
+      "colour": "red",
+      "x_mm": 850.0,
+      "y_mm": 850.0,
+      "length_mm": 360.0,
+      "breadth_mm": 360.0,
+      "orientation_deg": 0.0
+    },
+    {
+      "id": "blue_block_01",
+      "colour": "blue",
+      "x_mm": 1650.0,
+      "y_mm": 850.0,
+      "length_mm": 360.0,
+      "breadth_mm": 360.0,
+      "orientation_deg": 0.0
+    },
+    {
+      "id": "green_block_01",
+      "colour": "green",
+      "x_mm": 850.0,
+      "y_mm": 1650.0,
+      "length_mm": 360.0,
+      "breadth_mm": 360.0,
+      "orientation_deg": 0.0
+    },
+    {
+      "id": "yellow_block_01",
+      "colour": "yellow",
+      "x_mm": 1650.0,
+      "y_mm": 1650.0,
+      "length_mm": 360.0,
+      "breadth_mm": 360.0,
+      "orientation_deg": 0.0
+    }
+  ],
+  "user_instruction": "Drive to coordinate (2150 mm, 2150 mm) without touching any block, then stop.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 2150.0,
+    "target_y_mm": 2150.0,
+    "position_tolerance_mm": 80.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

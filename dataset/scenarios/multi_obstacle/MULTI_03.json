@@ -1,0 +1,51 @@
+{
+  "name": "MULTI_03",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 1250.0,
+    "y_mm": 300.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 0.0
+  },
+  "blocks": [
+    {
+      "id": "yellow_block_01",
+      "colour": "yellow",
+      "x_mm": 700.0,
+      "y_mm": 950.0,
+      "length_mm": 700.0,
+      "breadth_mm": 260.0,
+      "orientation_deg": 90.0
+    },
+    {
+      "id": "red_block_01",
+      "colour": "red",
+      "x_mm": 1700.0,
+      "y_mm": 950.0,
+      "length_mm": 700.0,
+      "breadth_mm": 260.0,
+      "orientation_deg": 90.0
+    },
+    {
+      "id": "green_block_01",
+      "colour": "green",
+      "x_mm": 1250.0,
+      "y_mm": 1650.0,
+      "length_mm": 650.0,
+      "breadth_mm": 280.0,
+      "orientation_deg": 90.0
+    }
+  ],
+  "user_instruction": "Drive to coordinate (1250 mm, 2200 mm) while avoiding all three blocks, then stop.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 1250.0,
+    "target_y_mm": 2200.0,
+    "position_tolerance_mm": 75.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

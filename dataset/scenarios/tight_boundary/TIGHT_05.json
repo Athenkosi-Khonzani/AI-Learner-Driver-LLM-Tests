@@ -1,0 +1,42 @@
+{
+  "name": "TIGHT_05",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 400.0,
+    "y_mm": 2100.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 180.0
+  },
+  "blocks": [
+    {
+      "id": "red_block_01",
+      "colour": "red",
+      "x_mm": 850.0,
+      "y_mm": 1300.0,
+      "length_mm": 900.0,
+      "breadth_mm": 300.0,
+      "orientation_deg": 0.0
+    },
+    {
+      "id": "blue_block_01",
+      "colour": "blue",
+      "x_mm": 1650.0,
+      "y_mm": 750.0,
+      "length_mm": 800.0,
+      "breadth_mm": 300.0,
+      "orientation_deg": 90.0
+    }
+  ],
+  "user_instruction": "Drive to coordinate (2150 mm, 300 mm), avoiding both blocks and keeping the complete rover inside the arena.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 2150.0,
+    "target_y_mm": 300.0,
+    "position_tolerance_mm": 65.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "SINGLE_05",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 450.0,
+    "y_mm": 1900.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 180.0
+  },
+  "blocks": [
+    {
+      "id": "red_block_01",
+      "colour": "red",
+      "x_mm": 1250.0,
+      "y_mm": 1350.0,
+      "length_mm": 800.0,
+      "breadth_mm": 340.0,
+      "orientation_deg": 90.0
+    }
+  ],
+  "user_instruction": "Drive to coordinate (2050 mm, 550 mm) while avoiding the red block and staying inside the arena.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 2050.0,
+    "target_y_mm": 550.0,
+    "position_tolerance_mm": 70.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "OBJECT_05",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 500.0,
+    "y_mm": 500.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 0.0
+  },
+  "blocks": [
+    {
+      "id": "red_block_01",
+      "colour": "red",
+      "x_mm": 900.0,
+      "y_mm": 1800.0,
+      "length_mm": 240.0,
+      "breadth_mm": 200.0,
+      "orientation_deg": 0.0
+    },
+    {
+      "id": "blue_block_01",
+      "colour": "blue",
+      "x_mm": 1700.0,
+      "y_mm": 1800.0,
+      "length_mm": 240.0,
+      "breadth_mm": 200.0,
+      "orientation_deg": 0.0
+    }
+  ],
+  "user_instruction": "Drive to the midpoint between the red block centre and the blue block centre, then stop.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 1300.0,
+    "target_y_mm": 1800.0,
+    "position_tolerance_mm": 55.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "dataset_name": "ai_learner_llm_planning_benchmark",
+  "dataset_version": "1.0",
+  "locked": true,
+  "scenario_count": 30,
+  "expected_scenario_count": 30,
+  "scenario_count_ok": true,
+  "family_counts": {
+    "basic_motion": 4,
+    "coordinate_navigation": 4,
+    "object_target": 5,
+    "single_obstacle": 5,
+    "multi_obstacle": 6,
+    "tight_boundary": 6
+  },
+  "expected_family_counts": {
+    "basic_motion": 4,
+    "coordinate_navigation": 4,
+    "object_target": 5,
+    "single_obstacle": 5,
+    "multi_obstacle": 6,
+    "tight_boundary": 6
+  },
+  "family_counts_ok": true,
+  "duplicate_ids": [],
+  "all_valid": true,
+  "scenarios": [
+    {
+      "id": "BASIC_01",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 500.0,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "BASIC_02",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 600.0,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "BASIC_03",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 400.0,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "BASIC_04",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 300.0,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "COORD_01",
+      "family": "coordinate_navigation",
+      "difficulty": 1,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1048.5,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "COORD_02",
+      "family": "coordinate_navigation",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1272.8,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "COORD_03",
+      "family": "coordinate_navigation",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1489.9,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "COORD_04",
+      "family": "coordinate_navigation",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1324.3,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "OBJECT_01",
+      "family": "object_target",
+      "difficulty": 1,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1655.6,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "OBJECT_02",
+      "family": "object_target",
+      "difficulty": 1,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1864.2,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "OBJECT_03",
+      "family": "object_target",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1672.8,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "OBJECT_04",
+      "family": "object_target",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1522.8,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "OBJECT_05",
+      "family": "object_target",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1631.4,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "SINGLE_01",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2560.7,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "SINGLE_02",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2048.5,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "SINGLE_03",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2338.5,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "SINGLE_04",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2347.1,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "SINGLE_05",
+      "family": "single_obstacle",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2481.4,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "MULTI_01",
+      "family": "multi_obstacle",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2955.6,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "MULTI_02",
+      "family": "multi_obstacle",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1900.0,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "MULTI_03",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2448.5,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "MULTI_04",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 3043.5,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "MULTI_05",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2072.8,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "MULTI_06",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 3365.7,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "TIGHT_01",
+      "family": "tight_boundary",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1905.6,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "TIGHT_02",
+      "family": "tight_boundary",
+      "difficulty": 2,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2288.5,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "TIGHT_03",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1850.0,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "TIGHT_04",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 1850.0,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "TIGHT_05",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2976.3,
+      "clearance_radius_mm": 114.02
+    },
+    {
+      "id": "TIGHT_06",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "valid": true,
+      "problems": [],
+      "conservative_feasible": true,
+      "reference_path_length_mm": 2738.5,
+      "clearance_radius_mm": 114.02
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "OBJECT_02",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 1900.0,
+    "y_mm": 400.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 0.0
+  },
+  "blocks": [
+    {
+      "id": "red_block_01",
+      "colour": "red",
+      "x_mm": 900.0,
+      "y_mm": 1500.0,
+      "length_mm": 260.0,
+      "breadth_mm": 220.0,
+      "orientation_deg": 15.0
+    }
+  ],
+  "user_instruction": "Stop with the rover centre 350 mm directly west of the red block centre.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 550.0,
+    "target_y_mm": 1500.0,
+    "position_tolerance_mm": 50.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

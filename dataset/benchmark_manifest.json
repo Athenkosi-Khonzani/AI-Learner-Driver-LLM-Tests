@@ -1,0 +1,336 @@
+{
+  "dataset_name": "ai_learner_llm_planning_benchmark",
+  "dataset_version": "1.0",
+  "created_date": "2026-09-27",
+  "locked": true,
+  "scenario_count": 30,
+  "design": {
+    "arena_mm": [
+      2500,
+      2500
+    ],
+    "coordinate_frame": {
+      "origin": "bottom_left",
+      "x_axis": "right",
+      "y_axis": "up",
+      "heading_0_deg": "+Y/up",
+      "positive_turn": "right/clockwise"
+    },
+    "family_counts": {
+      "basic_motion": 4,
+      "coordinate_navigation": 4,
+      "object_target": 5,
+      "single_obstacle": 5,
+      "multi_obstacle": 6,
+      "tight_boundary": 6
+    },
+    "difficulty_scale": {
+      "1": "direct/simple reasoning",
+      "2": "moderate spatial planning",
+      "3": "multi-step/tight-clearance planning"
+    },
+    "important_rule": "Hidden evaluator goals and conservative reference paths are never sent to models."
+  },
+  "scenarios": [
+    {
+      "id": "BASIC_01",
+      "file": "scenarios/basic_motion/BASIC_01.json",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "title": "Straight forward",
+      "planning_skill": "direct distance execution",
+      "obstacle_count": 0,
+      "sha256": "fcc242c367ddd9a88461a7b1987892312bd4c6b54f95ebf9bc22c7467ebfa532"
+    },
+    {
+      "id": "BASIC_02",
+      "file": "scenarios/basic_motion/BASIC_02.json",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "title": "Right turn then forward",
+      "planning_skill": "signed turn convention",
+      "obstacle_count": 0,
+      "sha256": "38f37d571ec44bb0d5ecfe7139c1ff227852b31c36496d386bd6b2289ee8a6bf"
+    },
+    {
+      "id": "BASIC_03",
+      "file": "scenarios/basic_motion/BASIC_03.json",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "title": "Left turn then forward",
+      "planning_skill": "negative/right-left turn reasoning",
+      "obstacle_count": 0,
+      "sha256": "567a236a8ae2804b9c455c710b1868a5976477767afce7407d1836352ab8750f"
+    },
+    {
+      "id": "BASIC_04",
+      "file": "scenarios/basic_motion/BASIC_04.json",
+      "family": "basic_motion",
+      "difficulty": 1,
+      "title": "Reverse motion",
+      "planning_skill": "BACK command and heading preservation",
+      "obstacle_count": 0,
+      "sha256": "41e5b696217352b83a156ab1937d0a38d75d9dbdc66f428443cd7411f13e35bf"
+    },
+    {
+      "id": "COORD_01",
+      "file": "scenarios/coordinate_navigation/COORD_01.json",
+      "family": "coordinate_navigation",
+      "difficulty": 1,
+      "title": "North-east coordinate",
+      "planning_skill": "heading/distance from coordinates",
+      "obstacle_count": 0,
+      "sha256": "01e521c9e2a6d6f6df1d5ee2a4be12c0faaeb585afedef33900e5c18caf901cd"
+    },
+    {
+      "id": "COORD_02",
+      "file": "scenarios/coordinate_navigation/COORD_02.json",
+      "family": "coordinate_navigation",
+      "difficulty": 2,
+      "title": "South-east coordinate",
+      "planning_skill": "general coordinate geometry",
+      "obstacle_count": 0,
+      "sha256": "3ac3b116b307fac703309087e6043a9bce3b8067dc4364ae2310095b4252732e"
+    },
+    {
+      "id": "COORD_03",
+      "file": "scenarios/coordinate_navigation/COORD_03.json",
+      "family": "coordinate_navigation",
+      "difficulty": 2,
+      "title": "Westward coordinate",
+      "planning_skill": "large heading change and distance",
+      "obstacle_count": 0,
+      "sha256": "3f11983e16d658d5aa9768b63a4e74e6dbf3038ed6185a5b7824ba91699712b2"
+    },
+    {
+      "id": "COORD_04",
+      "file": "scenarios/coordinate_navigation/COORD_04.json",
+      "family": "coordinate_navigation",
+      "difficulty": 2,
+      "title": "Coordinate plus final heading",
+      "planning_skill": "position plus terminal orientation",
+      "obstacle_count": 0,
+      "sha256": "1da86c68a1ce0826d1c121eff995d710082e91ca952e0b6894ec185e4ebca2f2"
+    },
+    {
+      "id": "OBJECT_01",
+      "file": "scenarios/object_target/OBJECT_01.json",
+      "family": "object_target",
+      "difficulty": 1,
+      "title": "South of blue block",
+      "planning_skill": "object-reference and standoff reasoning",
+      "obstacle_count": 1,
+      "sha256": "6c08205a36144cc851e673d15ab73b268b25ece50fe153344b2396be09124ec5"
+    },
+    {
+      "id": "OBJECT_02",
+      "file": "scenarios/object_target/OBJECT_02.json",
+      "family": "object_target",
+      "difficulty": 1,
+      "title": "West of red block",
+      "planning_skill": "object-relative target position",
+      "obstacle_count": 1,
+      "sha256": "3d5e18bb7ea3b45baeaa7e889641e6a29a151d8829f9369bd9d52c2d3408cfd6"
+    },
+    {
+      "id": "OBJECT_03",
+      "file": "scenarios/object_target/OBJECT_03.json",
+      "family": "object_target",
+      "difficulty": 2,
+      "title": "East of green block",
+      "planning_skill": "object-relative target position",
+      "obstacle_count": 1,
+      "sha256": "abf53bf50eb4520c2cb93ba6d9cf2546586b8d3b2270e1158410b3ece7651c5b"
+    },
+    {
+      "id": "OBJECT_04",
+      "file": "scenarios/object_target/OBJECT_04.json",
+      "family": "object_target",
+      "difficulty": 2,
+      "title": "North of yellow block",
+      "planning_skill": "object-relative target position",
+      "obstacle_count": 1,
+      "sha256": "cfbef3ae95e2da2f1e492cc973cd0d12581af6a8238f05045d4e40f82a1de022"
+    },
+    {
+      "id": "OBJECT_05",
+      "file": "scenarios/object_target/OBJECT_05.json",
+      "family": "object_target",
+      "difficulty": 2,
+      "title": "Midpoint between red and blue",
+      "planning_skill": "multi-object spatial relation",
+      "obstacle_count": 2,
+      "sha256": "19e128f87c086be593c43ca79f129c19530201f69f3580a15732486030566a0b"
+    },
+    {
+      "id": "SINGLE_01",
+      "file": "scenarios/single_obstacle/SINGLE_01.json",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "title": "Central red obstruction",
+      "planning_skill": "single obstacle detour",
+      "obstacle_count": 1,
+      "sha256": "a1b31686714995c87bc17b081919fe6ac363327beac4b45c5fe72082f0783eae"
+    },
+    {
+      "id": "SINGLE_02",
+      "file": "scenarios/single_obstacle/SINGLE_02.json",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "title": "Horizontal blue barrier",
+      "planning_skill": "choose left/right detour",
+      "obstacle_count": 1,
+      "sha256": "46d197ce523d98df6ba37d03d4f60db1a704e33a929bf1b64c7bfe37eeb68c5c"
+    },
+    {
+      "id": "SINGLE_03",
+      "file": "scenarios/single_obstacle/SINGLE_03.json",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "title": "Vertical green barrier",
+      "planning_skill": "single-barrier routing",
+      "obstacle_count": 1,
+      "sha256": "2867a44c6f3977e5998e161905bd673bfce7967c56e43fb82450504005dfe894"
+    },
+    {
+      "id": "SINGLE_04",
+      "file": "scenarios/single_obstacle/SINGLE_04.json",
+      "family": "single_obstacle",
+      "difficulty": 2,
+      "title": "Diagonal yellow obstacle",
+      "planning_skill": "rotated-obstacle reasoning",
+      "obstacle_count": 1,
+      "sha256": "77b1bb69e83dbeb270e04fb8644413756dbff6a913f1fa497abb33e19dfa7929"
+    },
+    {
+      "id": "SINGLE_05",
+      "file": "scenarios/single_obstacle/SINGLE_05.json",
+      "family": "single_obstacle",
+      "difficulty": 3,
+      "title": "Offset red barrier",
+      "planning_skill": "detour selection with asymmetric free space",
+      "obstacle_count": 1,
+      "sha256": "f3a74d5e56920f7fa8ab607fbcf6e7fdae0106040695a74f587258658023ee2b"
+    },
+    {
+      "id": "MULTI_01",
+      "file": "scenarios/multi_obstacle/MULTI_01.json",
+      "family": "multi_obstacle",
+      "difficulty": 2,
+      "title": "Two-block stagger",
+      "planning_skill": "route around multiple obstacles",
+      "obstacle_count": 2,
+      "sha256": "aae2ba30b0e99330f3b91c308e0475012af5a38d95257abc5b2aacf2dce00375"
+    },
+    {
+      "id": "MULTI_02",
+      "file": "scenarios/multi_obstacle/MULTI_02.json",
+      "family": "multi_obstacle",
+      "difficulty": 2,
+      "title": "Three-block slalom",
+      "planning_skill": "multi-turn obstacle navigation",
+      "obstacle_count": 3,
+      "sha256": "c03c6d438021c8be7b2bdafe60c4c534326b935d060aed4c1e9ccca8b69a9baa"
+    },
+    {
+      "id": "MULTI_03",
+      "file": "scenarios/multi_obstacle/MULTI_03.json",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "title": "Offset gates",
+      "planning_skill": "select a feasible passage through obstacles",
+      "obstacle_count": 3,
+      "sha256": "4dcce0eaa85874d540d8775247d11c467a972f958f833f041689375def38f444"
+    },
+    {
+      "id": "MULTI_04",
+      "file": "scenarios/multi_obstacle/MULTI_04.json",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "title": "Four-corner offset field",
+      "planning_skill": "global route selection",
+      "obstacle_count": 4,
+      "sha256": "3df43db6aacc4949c870d34967d8f66cb0e9c31676b9cffee43d8c0a440c9941"
+    },
+    {
+      "id": "MULTI_05",
+      "file": "scenarios/multi_obstacle/MULTI_05.json",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "title": "Target relative to object in clutter",
+      "planning_skill": "object relation plus obstacle avoidance",
+      "obstacle_count": 3,
+      "sha256": "7773f2d42033d06ddb7ad9c3dd487474cd97c59904a1ad5c8241febcfa16aed1"
+    },
+    {
+      "id": "MULTI_06",
+      "file": "scenarios/multi_obstacle/MULTI_06.json",
+      "family": "multi_obstacle",
+      "difficulty": 3,
+      "title": "Cross-field routing",
+      "planning_skill": "complex multi-obstacle route",
+      "obstacle_count": 5,
+      "sha256": "baee11ce7152394a4e0da8c8d5b0a09b634ca1cb3afd173137d940b789ceae85"
+    },
+    {
+      "id": "TIGHT_01",
+      "file": "scenarios/tight_boundary/TIGHT_01.json",
+      "family": "tight_boundary",
+      "difficulty": 2,
+      "title": "Near left boundary target",
+      "planning_skill": "boundary-aware approach",
+      "obstacle_count": 0,
+      "sha256": "9c90cea0b2452032e39ffdb0a171fdaa4256a5a6047b3ec6debfa8bf77973219"
+    },
+    {
+      "id": "TIGHT_02",
+      "file": "scenarios/tight_boundary/TIGHT_02.json",
+      "family": "tight_boundary",
+      "difficulty": 2,
+      "title": "Near top boundary target",
+      "planning_skill": "boundary-aware stopping",
+      "obstacle_count": 0,
+      "sha256": "07536093c61a1f6f3ea3bc35e2ea539ec0563dbc4f8ebef797b6c1041785b2ea"
+    },
+    {
+      "id": "TIGHT_03",
+      "file": "scenarios/tight_boundary/TIGHT_03.json",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "title": "Narrow vertical corridor",
+      "planning_skill": "full-footprint clearance reasoning",
+      "obstacle_count": 2,
+      "sha256": "94a95c229ac38bab3a02d58855fef7c15c4a0587c31751da33bb9dcae7d8104c"
+    },
+    {
+      "id": "TIGHT_04",
+      "file": "scenarios/tight_boundary/TIGHT_04.json",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "title": "Narrow horizontal corridor",
+      "planning_skill": "full-footprint clearance reasoning",
+      "obstacle_count": 2,
+      "sha256": "cf491d1ecbe04d612a92a7a4742f32c4fe051351374c27baa16b434fe6eec28e"
+    },
+    {
+      "id": "TIGHT_05",
+      "file": "scenarios/tight_boundary/TIGHT_05.json",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "title": "Boundary plus obstacle",
+      "planning_skill": "combined boundary and obstacle clearance",
+      "obstacle_count": 2,
+      "sha256": "6bc70238c570ca63de8b0666c3baa3456376d83a77fe72366518b808ff7086c2"
+    },
+    {
+      "id": "TIGHT_06",
+      "file": "scenarios/tight_boundary/TIGHT_06.json",
+      "family": "tight_boundary",
+      "difficulty": 3,
+      "title": "Final heading near boundary",
+      "planning_skill": "terminal orientation with boundary clearance",
+      "obstacle_count": 2,
+      "sha256": "55b7947460cd7442ba33c730655419db4c78d3035bb503736389a0561dda1a1b"
+    }
+  ]
+}

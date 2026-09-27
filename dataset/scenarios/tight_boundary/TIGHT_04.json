@@ -1,0 +1,42 @@
+{
+  "name": "TIGHT_04",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 350.0,
+    "y_mm": 1250.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 90.0
+  },
+  "blocks": [
+    {
+      "id": "green_block_01",
+      "colour": "green",
+      "x_mm": 1300.0,
+      "y_mm": 850.0,
+      "length_mm": 1200.0,
+      "breadth_mm": 400.0,
+      "orientation_deg": 90.0
+    },
+    {
+      "id": "yellow_block_01",
+      "colour": "yellow",
+      "x_mm": 1300.0,
+      "y_mm": 1650.0,
+      "length_mm": 1200.0,
+      "breadth_mm": 400.0,
+      "orientation_deg": 90.0
+    }
+  ],
+  "user_instruction": "Drive through the gap between the green and yellow blocks to coordinate (2200 mm, 1250 mm), then stop.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 2200.0,
+    "target_y_mm": 1250.0,
+    "position_tolerance_mm": 65.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}

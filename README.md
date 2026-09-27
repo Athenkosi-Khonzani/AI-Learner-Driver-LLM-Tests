@@ -70,3 +70,28 @@ python run_benchmark_smoke.py --mode prompt_only
 
 Do not collect the final benchmark dataset until the smoke test has been inspected and
 the Phase 2 prompt/model configuration has been frozen.
+
+
+## Phase 3
+
+Phase 3 adds the frozen 30-scenario benchmark dataset.
+
+Inspect it visually:
+
+```powershell
+python run_dataset_manager.py
+```
+
+Validate all scenario hashes, category counts and conservative path feasibility:
+
+```powershell
+python validate_dataset.py
+```
+
+The dataset manifest is:
+
+```text
+dataset/benchmark_manifest.json
+```
+
+Do not modify frozen scenario files after benchmark data collection begins.
