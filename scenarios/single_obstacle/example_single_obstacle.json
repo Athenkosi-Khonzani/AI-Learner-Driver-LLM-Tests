@@ -1,0 +1,42 @@
+{
+  "name": "example_single_obstacle",
+  "arena_width_mm": 2500.0,
+  "arena_height_mm": 2500.0,
+  "rover": {
+    "x_mm": 400.0,
+    "y_mm": 400.0,
+    "length_mm": 180.0,
+    "breadth_mm": 140.0,
+    "heading_deg": 0.0
+  },
+  "blocks": [
+    {
+      "id": "red_block_01",
+      "colour": "red",
+      "x_mm": 1250.0,
+      "y_mm": 1350.0,
+      "length_mm": 320.0,
+      "breadth_mm": 220.0,
+      "orientation_deg": 0.0
+    },
+    {
+      "id": "blue_block_01",
+      "colour": "blue",
+      "x_mm": 2000.0,
+      "y_mm": 2000.0,
+      "length_mm": 300.0,
+      "breadth_mm": 200.0,
+      "orientation_deg": 0.0
+    }
+  ],
+  "user_instruction": "Drive safely to the blue block and stop near it.",
+  "hidden_goal": {
+    "goal_type": "pose",
+    "target_x_mm": 1850.0,
+    "target_y_mm": 1850.0,
+    "position_tolerance_mm": 100.0,
+    "require_heading": false,
+    "target_heading_deg": 0.0,
+    "heading_tolerance_deg": 15.0
+  }
+}
