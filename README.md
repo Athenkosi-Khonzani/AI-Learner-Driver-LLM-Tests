@@ -126,3 +126,25 @@ python run_phase4_pilot.py --resume-latest
 If interrupted, the same resume command continues only pending jobs.
 
 See `docs/PHASE4_PILOT.md` for the experimental design.
+
+## Phase 4 visualisation
+
+Generate comparison plots:
+
+```powershell
+python plot_phase4_results.py --session latest
+```
+
+Replay individual completed trials:
+
+```powershell
+python replay_phase4_results.py --session latest
+```
+
+Audit all executable records by independently re-simulating them:
+
+```powershell
+python verify_phase4_replays.py --session latest
+```
+
+See `docs/PHASE4_VISUALISATION.md`.
