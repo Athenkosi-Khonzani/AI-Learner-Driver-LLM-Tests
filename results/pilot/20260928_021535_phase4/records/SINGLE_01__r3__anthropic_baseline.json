@@ -1,0 +1,185 @@
+{
+  "request": {
+    "provider_key": "anthropic_baseline",
+    "provider": "anthropic",
+    "model": "claude-sonnet-5",
+    "mode": "structured",
+    "system_prompt": "BENCHMARK NONCE: a6df16feb4cf93bb\nThis identifier has no task meaning. Ignore it completely when planning the rover motion.\n\nYou are the high-level motion planner for a rectangular mobile rover.\n\nYour only task is to convert the supplied natural-language instruction and world state into a short executable motion plan.\n\nCoordinate and command conventions:\n- World origin is the arena bottom-left.\n- +X points right.\n- +Y points up.\n- Heading 0 degrees points +Y/up.\n- Heading 90 degrees points +X/right.\n- TURN uses signed degrees: positive = turn right/clockwise, negative = turn left/anticlockwise.\n- FWD and BACK values are distances in millimetres.\n- The rover has a rectangular physical footprint. Plan for the full rover body, not only its centre.\n- Avoid every obstacle and keep the complete rover footprint inside the arena at all times.\n\nCommand limits:\n- Maximum 12 commands total.\n- TURN: 0 < absolute value <= 180 degrees.\n- FWD: 0 < value <= 2000 mm.\n- BACK: 0 < value <= 1000 mm.\n- STOP must be the final command and may appear only once.\n\nDo not use tools, web search, or outside knowledge.\nUse only the supplied instruction and world state.\nReturn only the requested command-plan structure. Do not include explanations.\n",
+    "user_prompt": "USER INSTRUCTION:\nDrive to coordinate (2000 mm, 2000 mm) while avoiding the red block, then stop.\n\nWORLD STATE:\n{\n  \"arena\": {\n    \"height_mm\": 2500.0,\n    \"width_mm\": 2500.0\n  },\n  \"coordinate_frame\": {\n    \"heading\": {\n      \"0_deg\": \"+Y/up\",\n      \"180_deg\": \"-Y/down\",\n      \"270_deg\": \"-X/left\",\n      \"90_deg\": \"+X/right\"\n    },\n    \"origin\": \"arena_bottom_left\",\n    \"units\": \"mm\",\n    \"x_axis\": \"right\",\n    \"y_axis\": \"up\"\n  },\n  \"obstacles\": [\n    {\n      \"centre_mm\": {\n        \"x\": 1250.0,\n        \"y\": 1250.0\n      },\n      \"colour\": \"red\",\n      \"id\": \"red_block_01\",\n      \"orientation_deg\": 0.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1500.0,\n          \"y\": 1500.0\n        },\n        {\n          \"x\": 1000.0,\n          \"y\": 1500.0\n        },\n        {\n          \"x\": 1000.0,\n          \"y\": 1000.0\n        },\n        {\n          \"x\": 1500.0,\n          \"y\": 1000.0\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 500.0,\n        \"length\": 500.0\n      },\n      \"type\": \"coloured_block\"\n    }\n  ],\n  \"rover\": {\n    \"footprint_mm\": {\n      \"breadth\": 140.0,\n      \"length\": 180.0\n    },\n    \"pose\": {\n      \"heading_deg\": 0.0,\n      \"x_mm\": 500.0,\n      \"y_mm\": 500.0\n    }\n  },\n  \"schema\": \"ai_learner_world_state\",\n  \"schema_version\": \"benchmark-1.0\"\n}",
+    "canonical_prompt_sha256": "3c0dc1b7ffaf59dc7aa577389816ac19aa27ab8a5469e4c10a1733fff143a90c",
+    "transmitted_prompt_sha256": "1ff6f77d2155a27a5d2ee49f41a5787cc5d666cf6ae106e45cdce4d5c669b4d4",
+    "cache_buster_nonce": "a6df16feb4cf93bb",
+    "world_state": {
+      "schema": "ai_learner_world_state",
+      "schema_version": "benchmark-1.0",
+      "coordinate_frame": {
+        "units": "mm",
+        "origin": "arena_bottom_left",
+        "x_axis": "right",
+        "y_axis": "up",
+        "heading": {
+          "0_deg": "+Y/up",
+          "90_deg": "+X/right",
+          "180_deg": "-Y/down",
+          "270_deg": "-X/left"
+        }
+      },
+      "arena": {
+        "width_mm": 2500.0,
+        "height_mm": 2500.0
+      },
+      "rover": {
+        "pose": {
+          "x_mm": 500.0,
+          "y_mm": 500.0,
+          "heading_deg": 0.0
+        },
+        "footprint_mm": {
+          "length": 180.0,
+          "breadth": 140.0
+        }
+      },
+      "obstacles": [
+        {
+          "id": "red_block_01",
+          "type": "coloured_block",
+          "colour": "red",
+          "centre_mm": {
+            "x": 1250.0,
+            "y": 1250.0
+          },
+          "size_mm": {
+            "length": 500.0,
+            "breadth": 500.0
+          },
+          "orientation_deg": 0.0,
+          "polygon_mm": [
+            {
+              "x": 1500.0,
+              "y": 1500.0
+            },
+            {
+              "x": 1000.0,
+              "y": 1500.0
+            },
+            {
+              "x": 1000.0,
+              "y": 1000.0
+            },
+            {
+              "x": 1500.0,
+              "y": 1000.0
+            }
+          ]
+        }
+      ]
+    },
+    "user_instruction": "Drive to coordinate (2000 mm, 2000 mm) while avoiding the red block, then stop.",
+    "hidden_goal_not_sent_to_model": {
+      "goal_type": "pose",
+      "target_x_mm": 2000.0,
+      "target_y_mm": 2000.0,
+      "position_tolerance_mm": 70.0,
+      "require_heading": false,
+      "target_heading_deg": 0.0,
+      "heading_tolerance_deg": 15.0
+    }
+  },
+  "record": {
+    "benchmark_version": "phase4-pilot-1.0",
+    "timestamp_utc": "2026-09-28T00:34:31.977795+00:00",
+    "scenario_name": "SINGLE_01",
+    "scenario_path": "C:\\Users\\khonz\\OneDrive - University of Cape Town\\Final Year\\EEE4022S\\llm_tests\\dataset\\scenarios\\single_obstacle\\SINGLE_01.json",
+    "provider_key": "anthropic_baseline",
+    "provider": "anthropic",
+    "model": "claude-sonnet-5",
+    "mode": "structured",
+    "run_index": 147,
+    "prompt_sha256": "3c0dc1b7ffaf59dc7aa577389816ac19aa27ab8a5469e4c10a1733fff143a90c",
+    "api_success": true,
+    "api_latency_ms": 3616.6536999990058,
+    "validation_latency_ms": 11.780100001487881,
+    "plan_ready_latency_ms": 3628.4338000004936,
+    "json_parse_success": true,
+    "schema_valid": true,
+    "protocol_valid": true,
+    "simulation_executed": true,
+    "input_tokens": 1541,
+    "output_tokens": 212,
+    "total_tokens": 1753,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": null,
+    "estimated_cost_usd": 0.005202,
+    "response_id": "msg_011CfUu5zhZjz9TSFoxoriE8",
+    "finish_reason": "end_turn",
+    "error_type": null,
+    "error_message": null,
+    "raw_response": "{\"cmds\":[{\"op\":\"TURN\",\"value\":90},{\"op\":\"FWD\",\"value\":1500},{\"op\":\"TURN\",\"value\":-90},{\"op\":\"FWD\",\"value\":1500},{\"op\":\"STOP\",\"value\":null}]}",
+    "parsed_plan": {
+      "cmds": [
+        {
+          "op": "TURN",
+          "value": 90.0
+        },
+        {
+          "op": "FWD",
+          "value": 1500.0
+        },
+        {
+          "op": "TURN",
+          "value": -90.0
+        },
+        {
+          "op": "FWD",
+          "value": 1500.0
+        },
+        {
+          "op": "STOP",
+          "value": null
+        }
+      ]
+    },
+    "wire_commands": [
+      [
+        "TURN",
+        90
+      ],
+      [
+        "FWD",
+        1500
+      ],
+      [
+        "TURN",
+        -90
+      ],
+      [
+        "FWD",
+        1500
+      ],
+      [
+        "STOP"
+      ]
+    ],
+    "task_success": true,
+    "safe": true,
+    "collision": false,
+    "boundary_violation": false,
+    "stop_reached": true,
+    "final_x_mm": 2000.0,
+    "final_y_mm": 2000.0,
+    "final_heading_deg": 0.0,
+    "position_error_mm": 0.0,
+    "heading_error_deg": null,
+    "travel_distance_mm": 3000.0,
+    "total_rotation_deg": 180.0,
+    "commands_executed": 5,
+    "job_id": "SINGLE_01__r3__anthropic_baseline",
+    "scenario_family": "single_obstacle",
+    "scenario_difficulty": 2,
+    "scenario_title": "Central red obstruction",
+    "repetition_index": 3,
+    "execution_order": 147,
+    "cache_buster_nonce": "a6df16feb4cf93bb",
+    "transmitted_prompt_sha256": "1ff6f77d2155a27a5d2ee49f41a5787cc5d666cf6ae106e45cdce4d5c669b4d4"
+  }
+}

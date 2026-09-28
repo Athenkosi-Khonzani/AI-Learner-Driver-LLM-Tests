@@ -1,0 +1,238 @@
+{
+  "request": {
+    "provider_key": "anthropic_baseline",
+    "provider": "anthropic",
+    "model": "claude-sonnet-5",
+    "mode": "structured",
+    "system_prompt": "BENCHMARK NONCE: ff30980955b6a1aa\nThis identifier has no task meaning. Ignore it completely when planning the rover motion.\n\nYou are the high-level motion planner for a rectangular mobile rover.\n\nYour only task is to convert the supplied natural-language instruction and world state into a short executable motion plan.\n\nCoordinate and command conventions:\n- World origin is the arena bottom-left.\n- +X points right.\n- +Y points up.\n- Heading 0 degrees points +Y/up.\n- Heading 90 degrees points +X/right.\n- TURN uses signed degrees: positive = turn right/clockwise, negative = turn left/anticlockwise.\n- FWD and BACK values are distances in millimetres.\n- The rover has a rectangular physical footprint. Plan for the full rover body, not only its centre.\n- Avoid every obstacle and keep the complete rover footprint inside the arena at all times.\n\nCommand limits:\n- Maximum 12 commands total.\n- TURN: 0 < absolute value <= 180 degrees.\n- FWD: 0 < value <= 2000 mm.\n- BACK: 0 < value <= 1000 mm.\n- STOP must be the final command and may appear only once.\n\nDo not use tools, web search, or outside knowledge.\nUse only the supplied instruction and world state.\nReturn only the requested command-plan structure. Do not include explanations.\n",
+    "user_prompt": "USER INSTRUCTION:\nDrive to coordinate (2150 mm, 2150 mm) without touching any block, then stop.\n\nWORLD STATE:\n{\n  \"arena\": {\n    \"height_mm\": 2500.0,\n    \"width_mm\": 2500.0\n  },\n  \"coordinate_frame\": {\n    \"heading\": {\n      \"0_deg\": \"+Y/up\",\n      \"180_deg\": \"-Y/down\",\n      \"270_deg\": \"-X/left\",\n      \"90_deg\": \"+X/right\"\n    },\n    \"origin\": \"arena_bottom_left\",\n    \"units\": \"mm\",\n    \"x_axis\": \"right\",\n    \"y_axis\": \"up\"\n  },\n  \"obstacles\": [\n    {\n      \"centre_mm\": {\n        \"x\": 850.0,\n        \"y\": 850.0\n      },\n      \"colour\": \"red\",\n      \"id\": \"red_block_01\",\n      \"orientation_deg\": 0.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1030.0,\n          \"y\": 1030.0\n        },\n        {\n          \"x\": 670.0,\n          \"y\": 1030.0\n        },\n        {\n          \"x\": 670.0,\n          \"y\": 670.0\n        },\n        {\n          \"x\": 1030.0,\n          \"y\": 670.0\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 360.0,\n        \"length\": 360.0\n      },\n      \"type\": \"coloured_block\"\n    },\n    {\n      \"centre_mm\": {\n        \"x\": 1650.0,\n        \"y\": 850.0\n      },\n      \"colour\": \"blue\",\n      \"id\": \"blue_block_01\",\n      \"orientation_deg\": 0.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1830.0,\n          \"y\": 1030.0\n        },\n        {\n          \"x\": 1470.0,\n          \"y\": 1030.0\n        },\n        {\n          \"x\": 1470.0,\n          \"y\": 670.0\n        },\n        {\n          \"x\": 1830.0,\n          \"y\": 670.0\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 360.0,\n        \"length\": 360.0\n      },\n      \"type\": \"coloured_block\"\n    },\n    {\n      \"centre_mm\": {\n        \"x\": 850.0,\n        \"y\": 1650.0\n      },\n      \"colour\": \"green\",\n      \"id\": \"green_block_01\",\n      \"orientation_deg\": 0.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1030.0,\n          \"y\": 1830.0\n        },\n        {\n          \"x\": 670.0,\n          \"y\": 1830.0\n        },\n        {\n          \"x\": 670.0,\n          \"y\": 1470.0\n        },\n        {\n          \"x\": 1030.0,\n          \"y\": 1470.0\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 360.0,\n        \"length\": 360.0\n      },\n      \"type\": \"coloured_block\"\n    },\n    {\n      \"centre_mm\": {\n        \"x\": 1650.0,\n        \"y\": 1650.0\n      },\n      \"colour\": \"yellow\",\n      \"id\": \"yellow_block_01\",\n      \"orientation_deg\": 0.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1830.0,\n          \"y\": 1830.0\n        },\n        {\n          \"x\": 1470.0,\n          \"y\": 1830.0\n        },\n        {\n          \"x\": 1470.0,\n          \"y\": 1470.0\n        },\n        {\n          \"x\": 1830.0,\n          \"y\": 1470.0\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 360.0,\n        \"length\": 360.0\n      },\n      \"type\": \"coloured_block\"\n    }\n  ],\n  \"rover\": {\n    \"footprint_mm\": {\n      \"breadth\": 140.0,\n      \"length\": 180.0\n    },\n    \"pose\": {\n      \"heading_deg\": 45.0,\n      \"x_mm\": 350.0,\n      \"y_mm\": 350.0\n    }\n  },\n  \"schema\": \"ai_learner_world_state\",\n  \"schema_version\": \"benchmark-1.0\"\n}",
+    "canonical_prompt_sha256": "6b3c00595fb19b880d6f494cad2c01f2f27400722d68ad3cd51bcaf5b4053d50",
+    "transmitted_prompt_sha256": "341b744633ff04fdb1c179782ab71f4cbac43028de9d92b881e4cc0e2e2c98de",
+    "cache_buster_nonce": "ff30980955b6a1aa",
+    "world_state": {
+      "schema": "ai_learner_world_state",
+      "schema_version": "benchmark-1.0",
+      "coordinate_frame": {
+        "units": "mm",
+        "origin": "arena_bottom_left",
+        "x_axis": "right",
+        "y_axis": "up",
+        "heading": {
+          "0_deg": "+Y/up",
+          "90_deg": "+X/right",
+          "180_deg": "-Y/down",
+          "270_deg": "-X/left"
+        }
+      },
+      "arena": {
+        "width_mm": 2500.0,
+        "height_mm": 2500.0
+      },
+      "rover": {
+        "pose": {
+          "x_mm": 350.0,
+          "y_mm": 350.0,
+          "heading_deg": 45.0
+        },
+        "footprint_mm": {
+          "length": 180.0,
+          "breadth": 140.0
+        }
+      },
+      "obstacles": [
+        {
+          "id": "red_block_01",
+          "type": "coloured_block",
+          "colour": "red",
+          "centre_mm": {
+            "x": 850.0,
+            "y": 850.0
+          },
+          "size_mm": {
+            "length": 360.0,
+            "breadth": 360.0
+          },
+          "orientation_deg": 0.0,
+          "polygon_mm": [
+            {
+              "x": 1030.0,
+              "y": 1030.0
+            },
+            {
+              "x": 670.0,
+              "y": 1030.0
+            },
+            {
+              "x": 670.0,
+              "y": 670.0
+            },
+            {
+              "x": 1030.0,
+              "y": 670.0
+            }
+          ]
+        },
+        {
+          "id": "blue_block_01",
+          "type": "coloured_block",
+          "colour": "blue",
+          "centre_mm": {
+            "x": 1650.0,
+            "y": 850.0
+          },
+          "size_mm": {
+            "length": 360.0,
+            "breadth": 360.0
+          },
+          "orientation_deg": 0.0,
+          "polygon_mm": [
+            {
+              "x": 1830.0,
+              "y": 1030.0
+            },
+            {
+              "x": 1470.0,
+              "y": 1030.0
+            },
+            {
+              "x": 1470.0,
+              "y": 670.0
+            },
+            {
+              "x": 1830.0,
+              "y": 670.0
+            }
+          ]
+        },
+        {
+          "id": "green_block_01",
+          "type": "coloured_block",
+          "colour": "green",
+          "centre_mm": {
+            "x": 850.0,
+            "y": 1650.0
+          },
+          "size_mm": {
+            "length": 360.0,
+            "breadth": 360.0
+          },
+          "orientation_deg": 0.0,
+          "polygon_mm": [
+            {
+              "x": 1030.0,
+              "y": 1830.0
+            },
+            {
+              "x": 670.0,
+              "y": 1830.0
+            },
+            {
+              "x": 670.0,
+              "y": 1470.0
+            },
+            {
+              "x": 1030.0,
+              "y": 1470.0
+            }
+          ]
+        },
+        {
+          "id": "yellow_block_01",
+          "type": "coloured_block",
+          "colour": "yellow",
+          "centre_mm": {
+            "x": 1650.0,
+            "y": 1650.0
+          },
+          "size_mm": {
+            "length": 360.0,
+            "breadth": 360.0
+          },
+          "orientation_deg": 0.0,
+          "polygon_mm": [
+            {
+              "x": 1830.0,
+              "y": 1830.0
+            },
+            {
+              "x": 1470.0,
+              "y": 1830.0
+            },
+            {
+              "x": 1470.0,
+              "y": 1470.0
+            },
+            {
+              "x": 1830.0,
+              "y": 1470.0
+            }
+          ]
+        }
+      ]
+    },
+    "user_instruction": "Drive to coordinate (2150 mm, 2150 mm) without touching any block, then stop.",
+    "hidden_goal_not_sent_to_model": {
+      "goal_type": "pose",
+      "target_x_mm": 2150.0,
+      "target_y_mm": 2150.0,
+      "position_tolerance_mm": 80.0,
+      "require_heading": false,
+      "target_heading_deg": 0.0,
+      "heading_tolerance_deg": 15.0
+    }
+  },
+  "record": {
+    "benchmark_version": "phase4-pilot-1.0",
+    "timestamp_utc": "2026-09-28T00:27:46.905806+00:00",
+    "scenario_name": "MULTI_04",
+    "scenario_path": "C:\\Users\\khonz\\OneDrive - University of Cape Town\\Final Year\\EEE4022S\\llm_tests\\dataset\\scenarios\\multi_obstacle\\MULTI_04.json",
+    "provider_key": "anthropic_baseline",
+    "provider": "anthropic",
+    "model": "claude-sonnet-5",
+    "mode": "structured",
+    "run_index": 91,
+    "prompt_sha256": "6b3c00595fb19b880d6f494cad2c01f2f27400722d68ad3cd51bcaf5b4053d50",
+    "api_success": false,
+    "api_latency_ms": 7064.977199999703,
+    "validation_latency_ms": 0.00039999940781854093,
+    "plan_ready_latency_ms": 7064.977599999111,
+    "json_parse_success": false,
+    "schema_valid": false,
+    "protocol_valid": false,
+    "simulation_executed": false,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "estimated_cost_usd": null,
+    "response_id": null,
+    "finish_reason": null,
+    "error_type": "JSONDecodeError",
+    "error_message": "Expecting value: line 1 column 1 (char 0)",
+    "raw_response": "",
+    "parsed_plan": null,
+    "wire_commands": null,
+    "task_success": null,
+    "safe": null,
+    "collision": null,
+    "boundary_violation": null,
+    "stop_reached": null,
+    "final_x_mm": null,
+    "final_y_mm": null,
+    "final_heading_deg": null,
+    "position_error_mm": null,
+    "heading_error_deg": null,
+    "travel_distance_mm": null,
+    "total_rotation_deg": null,
+    "commands_executed": null,
+    "job_id": "MULTI_04__r2__anthropic_baseline",
+    "scenario_family": "multi_obstacle",
+    "scenario_difficulty": 3,
+    "scenario_title": "Four-corner offset field",
+    "repetition_index": 2,
+    "execution_order": 91,
+    "cache_buster_nonce": "ff30980955b6a1aa",
+    "transmitted_prompt_sha256": "341b744633ff04fdb1c179782ab71f4cbac43028de9d92b881e4cc0e2e2c98de"
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "request": {
+    "provider_key": "anthropic_baseline",
+    "provider": "anthropic",
+    "model": "claude-sonnet-5",
+    "mode": "structured",
+    "system_prompt": "BENCHMARK NONCE: e9675f2c3d35086a\nThis identifier has no task meaning. Ignore it completely when planning the rover motion.\n\nYou are the high-level motion planner for a rectangular mobile rover.\n\nYour only task is to convert the supplied natural-language instruction and world state into a short executable motion plan.\n\nCoordinate and command conventions:\n- World origin is the arena bottom-left.\n- +X points right.\n- +Y points up.\n- Heading 0 degrees points +Y/up.\n- Heading 90 degrees points +X/right.\n- TURN uses signed degrees: positive = turn right/clockwise, negative = turn left/anticlockwise.\n- FWD and BACK values are distances in millimetres.\n- The rover has a rectangular physical footprint. Plan for the full rover body, not only its centre.\n- Avoid every obstacle and keep the complete rover footprint inside the arena at all times.\n\nCommand limits:\n- Maximum 12 commands total.\n- TURN: 0 < absolute value <= 180 degrees.\n- FWD: 0 < value <= 2000 mm.\n- BACK: 0 < value <= 1000 mm.\n- STOP must be the final command and may appear only once.\n\nDo not use tools, web search, or outside knowledge.\nUse only the supplied instruction and world state.\nReturn only the requested command-plan structure. Do not include explanations.\n",
+    "user_prompt": "USER INSTRUCTION:\nDrive to coordinate (2100 mm, 2100 mm), face east, and stop. Avoid both blocks and keep the rover inside the arena.\n\nWORLD STATE:\n{\n  \"arena\": {\n    \"height_mm\": 2500.0,\n    \"width_mm\": 2500.0\n  },\n  \"coordinate_frame\": {\n    \"heading\": {\n      \"0_deg\": \"+Y/up\",\n      \"180_deg\": \"-Y/down\",\n      \"270_deg\": \"-X/left\",\n      \"90_deg\": \"+X/right\"\n    },\n    \"origin\": \"arena_bottom_left\",\n    \"units\": \"mm\",\n    \"x_axis\": \"right\",\n    \"y_axis\": \"up\"\n  },\n  \"obstacles\": [\n    {\n      \"centre_mm\": {\n        \"x\": 1200.0,\n        \"y\": 1000.0\n      },\n      \"colour\": \"green\",\n      \"id\": \"green_block_01\",\n      \"orientation_deg\": 35.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1466.3,\n          \"y\": 1118.8\n        },\n        {\n          \"x\": 1220.5,\n          \"y\": 1290.8\n        },\n        {\n          \"x\": 933.7,\n          \"y\": 881.2\n        },\n        {\n          \"x\": 1179.5,\n          \"y\": 709.2\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 300.0,\n        \"length\": 500.0\n      },\n      \"type\": \"coloured_block\"\n    },\n    {\n      \"centre_mm\": {\n        \"x\": 1700.0,\n        \"y\": 1550.0\n      },\n      \"colour\": \"yellow\",\n      \"id\": \"yellow_block_01\",\n      \"orientation_deg\": 325.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1679.5,\n          \"y\": 1840.8\n        },\n        {\n          \"x\": 1433.7,\n          \"y\": 1668.8\n        },\n        {\n          \"x\": 1720.5,\n          \"y\": 1259.2\n        },\n        {\n          \"x\": 1966.3,\n          \"y\": 1431.2\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 300.0,\n        \"length\": 500.0\n      },\n      \"type\": \"coloured_block\"\n    }\n  ],\n  \"rover\": {\n    \"footprint_mm\": {\n      \"breadth\": 140.0,\n      \"length\": 180.0\n    },\n    \"pose\": {\n      \"heading_deg\": 0.0,\n      \"x_mm\": 350.0,\n      \"y_mm\": 350.0\n    }\n  },\n  \"schema\": \"ai_learner_world_state\",\n  \"schema_version\": \"benchmark-1.0\"\n}",
+    "canonical_prompt_sha256": "0e437b5743edc24d2469129c562e398989de8b196ae9b7d1355f2f2c410683b9",
+    "transmitted_prompt_sha256": "5017a4996274b2e4aed812bd989c2ef719c6c222938d59d3550bc31d886e0a1e",
+    "cache_buster_nonce": "e9675f2c3d35086a",
+    "world_state": {
+      "schema": "ai_learner_world_state",
+      "schema_version": "benchmark-1.0",
+      "coordinate_frame": {
+        "units": "mm",
+        "origin": "arena_bottom_left",
+        "x_axis": "right",
+        "y_axis": "up",
+        "heading": {
+          "0_deg": "+Y/up",
+          "90_deg": "+X/right",
+          "180_deg": "-Y/down",
+          "270_deg": "-X/left"
+        }
+      },
+      "arena": {
+        "width_mm": 2500.0,
+        "height_mm": 2500.0
+      },
+      "rover": {
+        "pose": {
+          "x_mm": 350.0,
+          "y_mm": 350.0,
+          "heading_deg": 0.0
+        },
+        "footprint_mm": {
+          "length": 180.0,
+          "breadth": 140.0
+        }
+      },
+      "obstacles": [
+        {
+          "id": "green_block_01",
+          "type": "coloured_block",
+          "colour": "green",
+          "centre_mm": {
+            "x": 1200.0,
+            "y": 1000.0
+          },
+          "size_mm": {
+            "length": 500.0,
+            "breadth": 300.0
+          },
+          "orientation_deg": 35.0,
+          "polygon_mm": [
+            {
+              "x": 1466.3,
+              "y": 1118.8
+            },
+            {
+              "x": 1220.5,
+              "y": 1290.8
+            },
+            {
+              "x": 933.7,
+              "y": 881.2
+            },
+            {
+              "x": 1179.5,
+              "y": 709.2
+            }
+          ]
+        },
+        {
+          "id": "yellow_block_01",
+          "type": "coloured_block",
+          "colour": "yellow",
+          "centre_mm": {
+            "x": 1700.0,
+            "y": 1550.0
+          },
+          "size_mm": {
+            "length": 500.0,
+            "breadth": 300.0
+          },
+          "orientation_deg": 325.0,
+          "polygon_mm": [
+            {
+              "x": 1679.5,
+              "y": 1840.8
+            },
+            {
+              "x": 1433.7,
+              "y": 1668.8
+            },
+            {
+              "x": 1720.5,
+              "y": 1259.2
+            },
+            {
+              "x": 1966.3,
+              "y": 1431.2
+            }
+          ]
+        }
+      ]
+    },
+    "user_instruction": "Drive to coordinate (2100 mm, 2100 mm), face east, and stop. Avoid both blocks and keep the rover inside the arena.",
+    "hidden_goal_not_sent_to_model": {
+      "goal_type": "pose",
+      "target_x_mm": 2100.0,
+      "target_y_mm": 2100.0,
+      "position_tolerance_mm": 70.0,
+      "require_heading": true,
+      "target_heading_deg": 90.0,
+      "heading_tolerance_deg": 10.0
+    }
+  },
+  "record": {
+    "benchmark_version": "phase4-pilot-1.0",
+    "timestamp_utc": "2026-09-28T00:56:36.651807+00:00",
+    "scenario_name": "TIGHT_06",
+    "scenario_path": "C:\\Users\\khonz\\OneDrive - University of Cape Town\\Final Year\\EEE4022S\\llm_tests\\dataset\\scenarios\\tight_boundary\\TIGHT_06.json",
+    "provider_key": "anthropic_baseline",
+    "provider": "anthropic",
+    "model": "claude-sonnet-5",
+    "mode": "structured",
+    "run_index": 321,
+    "prompt_sha256": "0e437b5743edc24d2469129c562e398989de8b196ae9b7d1355f2f2c410683b9",
+    "api_success": true,
+    "api_latency_ms": 5049.2555999990145,
+    "validation_latency_ms": 16.726400001061847,
+    "plan_ready_latency_ms": 5065.982000000076,
+    "json_parse_success": true,
+    "schema_valid": true,
+    "protocol_valid": true,
+    "simulation_executed": true,
+    "input_tokens": 1799,
+    "output_tokens": 324,
+    "total_tokens": 2123,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": null,
+    "estimated_cost_usd": 0.006838,
+    "response_id": "msg_011CfUvmYcto2EAuHiaTEvVP",
+    "finish_reason": "end_turn",
+    "error_type": null,
+    "error_message": null,
+    "raw_response": "{\"cmds\":[{\"op\":\"FWD\",\"value\":1750},{\"op\":\"TURN\",\"value\":90},{\"op\":\"FWD\",\"value\":1750},{\"op\":\"STOP\",\"value\":null}]}",
+    "parsed_plan": {
+      "cmds": [
+        {
+          "op": "FWD",
+          "value": 1750.0
+        },
+        {
+          "op": "TURN",
+          "value": 90.0
+        },
+        {
+          "op": "FWD",
+          "value": 1750.0
+        },
+        {
+          "op": "STOP",
+          "value": null
+        }
+      ]
+    },
+    "wire_commands": [
+      [
+        "FWD",
+        1750
+      ],
+      [
+        "TURN",
+        90
+      ],
+      [
+        "FWD",
+        1750
+      ],
+      [
+        "STOP"
+      ]
+    ],
+    "task_success": true,
+    "safe": true,
+    "collision": false,
+    "boundary_violation": false,
+    "stop_reached": true,
+    "final_x_mm": 2100.0,
+    "final_y_mm": 2100.0,
+    "final_heading_deg": 90.0,
+    "position_error_mm": 0.0,
+    "heading_error_deg": 0.0,
+    "travel_distance_mm": 3500.0,
+    "total_rotation_deg": 90.0,
+    "commands_executed": 4,
+    "job_id": "TIGHT_06__r1__anthropic_baseline",
+    "scenario_family": "tight_boundary",
+    "scenario_difficulty": 3,
+    "scenario_title": "Final heading near boundary",
+    "repetition_index": 1,
+    "execution_order": 321,
+    "cache_buster_nonce": "e9675f2c3d35086a",
+    "transmitted_prompt_sha256": "5017a4996274b2e4aed812bd989c2ef719c6c222938d59d3550bc31d886e0a1e"
+  }
+}

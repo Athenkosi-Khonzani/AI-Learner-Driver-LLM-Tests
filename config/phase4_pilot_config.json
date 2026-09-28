@@ -1,0 +1,34 @@
+{
+  "pilot_version": "phase4-pilot-1.0",
+  "mode": "structured",
+  "repetitions_per_scenario": 3,
+  "providers": [
+    "openai_fast",
+    "anthropic_fast",
+    "gemini_fast",
+    "anthropic_baseline"
+  ],
+  "cache_busting": {
+    "enabled": true,
+    "strategy": "semantic_invariant_nonce_prefix",
+    "description": "Each scenario/repetition receives a unique neutral benchmark nonce. The same nonce is sent to every provider for that scenario/repetition. The task wording and world state are otherwise unchanged."
+  },
+  "scheduling": {
+    "randomize_scenario_repetition_order": true,
+    "randomize_provider_order_within_repetition": true,
+    "delay_min_seconds": 3.0,
+    "delay_max_seconds": 6.0,
+    "cooldown_every_calls": 40,
+    "cooldown_min_seconds": 15.0,
+    "cooldown_max_seconds": 25.0,
+    "parallel_calls": 1
+  },
+  "data_collection": {
+    "planned_scenarios": 30,
+    "planned_runs_per_model_per_scenario": 3,
+    "planned_calls_total": 360,
+    "planned_calls_per_model": 90,
+    "auto_retry_api_failures": false,
+    "reason": "API failures are retained as experimental outcomes. Automatic retrying would change the definition of a trial."
+  }
+}

@@ -1,4 +1,3 @@
-\
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -57,6 +56,16 @@ class BenchmarkRecord:
     travel_distance_mm: float | None
     total_rotation_deg: float | None
     commands_executed: int | None
+
+    # Phase 4 context. These remain optional so Phase 2 smoke scripts still run.
+    job_id: str | None = None
+    scenario_family: str | None = None
+    scenario_difficulty: int | None = None
+    scenario_title: str | None = None
+    repetition_index: int | None = None
+    execution_order: int | None = None
+    cache_buster_nonce: str | None = None
+    transmitted_prompt_sha256: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

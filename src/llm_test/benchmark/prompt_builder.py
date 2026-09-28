@@ -1,4 +1,3 @@
-\
 from __future__ import annotations
 
 import json
@@ -41,8 +40,33 @@ def build_user_prompt(user_instruction: str, world_state: dict) -> str:
     )
 
 
-def build_prompt_payload(user_instruction: str, world_state: dict) -> dict:
+def build_prompt_payload(
+    user_instruction: str,
+    world_state: dict,
+    benchmark_nonce: str | None = None,
+) -> dict:
+    """
+    The canonical task prompt is fixed.
+
+    In Phase 4, an optional neutral nonce is placed at the very beginning of
+    the transmitted system prompt. This changes the literal request prefix so
+    repeated calls are less likely to benefit from provider prompt-prefix
+    caching, while leaving the task semantics unchanged.
+
+    For fairness, the batch scheduler gives all providers the SAME nonce for a
+    given scenario/repetition pair.
+    """
+    system = SYSTEM_PROMPT
+
+    if benchmark_nonce:
+        prefix = (
+            f"BENCHMARK NONCE: {benchmark_nonce}\n"
+            "This identifier has no task meaning. Ignore it completely when "
+            "planning the rover motion.\n\n"
+        )
+        system = prefix + SYSTEM_PROMPT
+
     return {
-        "system": SYSTEM_PROMPT,
+        "system": system,
         "user": build_user_prompt(user_instruction, world_state),
     }

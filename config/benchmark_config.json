@@ -1,6 +1,6 @@
 {
-  "benchmark_version": "phase2-smoke-1.0",
-  "frozen_on": "2026-09-27",
+  "benchmark_version": "phase4-pilot-1.0",
+  "frozen_on": "2026-09-28",
   "mode": "structured",
   "max_output_tokens": 512,
   "models": {

@@ -95,3 +95,34 @@ dataset/benchmark_manifest.json
 ```
 
 Do not modify frozen scenario files after benchmark data collection begins.
+
+
+## Phase 4
+
+Phase 4 runs the statistical pilot:
+
+```text
+30 scenarios × 3 repetitions × 4 model entries = 360 calls
+```
+
+Create and inspect the randomized schedule without spending credits:
+
+```powershell
+python run_phase4_pilot.py --dry-run
+```
+
+Run a small 8-call live check from that same frozen session:
+
+```powershell
+python run_phase4_pilot.py --resume-latest --limit 8
+```
+
+Then continue the same session:
+
+```powershell
+python run_phase4_pilot.py --resume-latest
+```
+
+If interrupted, the same resume command continues only pending jobs.
+
+See `docs/PHASE4_PILOT.md` for the experimental design.

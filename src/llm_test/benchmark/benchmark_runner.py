@@ -1,8 +1,6 @@
-\
 from __future__ import annotations
 
 import hashlib
-import json
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -66,16 +64,26 @@ def _estimated_cost(
     ) / 1_000_000.0
 
 
+def _sha256_prompt(payload: dict) -> str:
+    value = (
+        payload["system"]
+        + "\n\n"
+        + payload["user"]
+    ).encode("utf-8")
+    return hashlib.sha256(value).hexdigest()
+
+
 class BenchmarkRunner:
     def __init__(
         self,
         project_root: Path,
         config: dict,
         session_id: str,
+        store=None,
     ):
         self.project_root = project_root
         self.config = config
-        self.store = ResultStore(
+        self.store = store or ResultStore(
             project_root=project_root,
             session_id=session_id,
         )
@@ -86,27 +94,30 @@ class BenchmarkRunner:
         provider_key: str,
         run_index: int = 1,
         mode: str | None = None,
+        benchmark_nonce: str | None = None,
+        record_context: dict | None = None,
     ) -> BenchmarkRecord:
 
         scenario = Scenario.load(scenario_path)
         world_state = build_world_state(scenario)
 
-        prompt = build_prompt_payload(
+        # Canonical prompt deliberately excludes the Phase 4 cache-busting nonce.
+        canonical_prompt = build_prompt_payload(
             scenario.user_instruction,
             world_state,
+            benchmark_nonce=None,
         )
 
+        transmitted_prompt = build_prompt_payload(
+            scenario.user_instruction,
+            world_state,
+            benchmark_nonce=benchmark_nonce,
+        )
+
+        canonical_prompt_hash = _sha256_prompt(canonical_prompt)
+        transmitted_prompt_hash = _sha256_prompt(transmitted_prompt)
+
         mode = mode or self.config.get("mode", "structured")
-
-        canonical_prompt_bytes = (
-            prompt["system"]
-            + "\n\n"
-            + prompt["user"]
-        ).encode("utf-8")
-
-        prompt_hash = hashlib.sha256(
-            canonical_prompt_bytes
-        ).hexdigest()
 
         model_config = dict(
             self.config["models"][provider_key]
@@ -120,8 +131,8 @@ class BenchmarkRunner:
         adapter = _adapter_for(model_config)
 
         response = adapter.generate(
-            system_prompt=prompt["system"],
-            user_prompt=prompt["user"],
+            system_prompt=transmitted_prompt["system"],
+            user_prompt=transmitted_prompt["user"],
             mode=mode,
         )
 
@@ -181,6 +192,7 @@ class BenchmarkRunner:
         )
 
         usage = response.usage
+        ctx = record_context or {}
 
         record = BenchmarkRecord(
             benchmark_version=self.config["benchmark_version"],
@@ -192,7 +204,9 @@ class BenchmarkRunner:
             model=response.model,
             mode=mode,
             run_index=run_index,
-            prompt_sha256=prompt_hash,
+
+            # Same across repetitions because the semantic task is frozen.
+            prompt_sha256=canonical_prompt_hash,
 
             api_success=response.api_success,
             api_latency_ms=response.latency_s * 1000.0,
@@ -271,6 +285,15 @@ class BenchmarkRunner:
             commands_executed=(
                 score.commands_executed if score else None
             ),
+
+            job_id=ctx.get("job_id"),
+            scenario_family=ctx.get("scenario_family"),
+            scenario_difficulty=ctx.get("scenario_difficulty"),
+            scenario_title=ctx.get("scenario_title"),
+            repetition_index=ctx.get("repetition_index"),
+            execution_order=ctx.get("execution_order"),
+            cache_buster_nonce=benchmark_nonce,
+            transmitted_prompt_sha256=transmitted_prompt_hash,
         )
 
         request_payload = {
@@ -278,10 +301,20 @@ class BenchmarkRunner:
             "provider": response.provider,
             "model": response.model,
             "mode": mode,
-            "system_prompt": prompt["system"],
-            "user_prompt": prompt["user"],
+
+            # The transmitted request is logged exactly for reproducibility.
+            "system_prompt": transmitted_prompt["system"],
+            "user_prompt": transmitted_prompt["user"],
+
+            "canonical_prompt_sha256": canonical_prompt_hash,
+            "transmitted_prompt_sha256": transmitted_prompt_hash,
+            "cache_buster_nonce": benchmark_nonce,
+
             "world_state": world_state,
             "user_instruction": scenario.user_instruction,
+
+            # This is stored for audit/evaluation but never placed in the
+            # transmitted model prompt.
             "hidden_goal_not_sent_to_model": scenario.hidden_goal.__dict__,
         }
 

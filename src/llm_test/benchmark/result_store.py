@@ -1,10 +1,8 @@
-\
 from __future__ import annotations
 
 import csv
 import json
 from pathlib import Path
-from typing import Iterable
 
 from .benchmark_record import BenchmarkRecord
 
@@ -31,7 +29,7 @@ class ResultStore:
     ) -> Path:
 
         filename = (
-            f"{record.run_index:02d}_"
+            f"{record.run_index:03d}_"
             f"{record.provider_key}_"
             f"{record.scenario_name}.json"
         )
@@ -65,7 +63,6 @@ class ResultStore:
 
         row = record.to_dict()
 
-        # Keep large/nested fields out of the CSV.
         for key in (
             "raw_response",
             "parsed_plan",
@@ -73,7 +70,31 @@ class ResultStore:
         ):
             row.pop(key, None)
 
-        exists = path.exists()
+        # If an older CSV exists with the Phase 2 header, migrate it to the
+        # current superset header rather than failing when Phase 4 fields appear.
+        if path.exists():
+            with path.open("r", encoding="utf-8", newline="") as handle:
+                reader = csv.DictReader(handle)
+                existing_rows = list(reader)
+                old_fields = reader.fieldnames or []
+
+            new_fields = list(row.keys())
+            merged_fields = old_fields + [
+                f for f in new_fields if f not in old_fields
+            ]
+
+            if merged_fields != old_fields:
+                with path.open(
+                    "w", encoding="utf-8", newline=""
+                ) as handle:
+                    writer = csv.DictWriter(
+                        handle, fieldnames=merged_fields
+                    )
+                    writer.writeheader()
+                    for existing in existing_rows:
+                        writer.writerow(existing)
+        else:
+            merged_fields = list(row.keys())
 
         with path.open(
             "a",
@@ -82,10 +103,11 @@ class ResultStore:
         ) as handle:
             writer = csv.DictWriter(
                 handle,
-                fieldnames=list(row.keys()),
+                fieldnames=merged_fields,
+                extrasaction="ignore",
             )
 
-            if not exists:
+            if path.stat().st_size == 0:
                 writer.writeheader()
 
             writer.writerow(row)

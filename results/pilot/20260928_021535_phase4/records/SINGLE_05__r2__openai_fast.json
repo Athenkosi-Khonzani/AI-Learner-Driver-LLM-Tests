@@ -1,0 +1,185 @@
+{
+  "request": {
+    "provider_key": "openai_fast",
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "mode": "structured",
+    "system_prompt": "BENCHMARK NONCE: fc96f90d41d816db\nThis identifier has no task meaning. Ignore it completely when planning the rover motion.\n\nYou are the high-level motion planner for a rectangular mobile rover.\n\nYour only task is to convert the supplied natural-language instruction and world state into a short executable motion plan.\n\nCoordinate and command conventions:\n- World origin is the arena bottom-left.\n- +X points right.\n- +Y points up.\n- Heading 0 degrees points +Y/up.\n- Heading 90 degrees points +X/right.\n- TURN uses signed degrees: positive = turn right/clockwise, negative = turn left/anticlockwise.\n- FWD and BACK values are distances in millimetres.\n- The rover has a rectangular physical footprint. Plan for the full rover body, not only its centre.\n- Avoid every obstacle and keep the complete rover footprint inside the arena at all times.\n\nCommand limits:\n- Maximum 12 commands total.\n- TURN: 0 < absolute value <= 180 degrees.\n- FWD: 0 < value <= 2000 mm.\n- BACK: 0 < value <= 1000 mm.\n- STOP must be the final command and may appear only once.\n\nDo not use tools, web search, or outside knowledge.\nUse only the supplied instruction and world state.\nReturn only the requested command-plan structure. Do not include explanations.\n",
+    "user_prompt": "USER INSTRUCTION:\nDrive to coordinate (2050 mm, 550 mm) while avoiding the red block and staying inside the arena.\n\nWORLD STATE:\n{\n  \"arena\": {\n    \"height_mm\": 2500.0,\n    \"width_mm\": 2500.0\n  },\n  \"coordinate_frame\": {\n    \"heading\": {\n      \"0_deg\": \"+Y/up\",\n      \"180_deg\": \"-Y/down\",\n      \"270_deg\": \"-X/left\",\n      \"90_deg\": \"+X/right\"\n    },\n    \"origin\": \"arena_bottom_left\",\n    \"units\": \"mm\",\n    \"x_axis\": \"right\",\n    \"y_axis\": \"up\"\n  },\n  \"obstacles\": [\n    {\n      \"centre_mm\": {\n        \"x\": 1250.0,\n        \"y\": 1350.0\n      },\n      \"colour\": \"red\",\n      \"id\": \"red_block_01\",\n      \"orientation_deg\": 90.0,\n      \"polygon_mm\": [\n        {\n          \"x\": 1650.0,\n          \"y\": 1180.0\n        },\n        {\n          \"x\": 1650.0,\n          \"y\": 1520.0\n        },\n        {\n          \"x\": 850.0,\n          \"y\": 1520.0\n        },\n        {\n          \"x\": 850.0,\n          \"y\": 1180.0\n        }\n      ],\n      \"size_mm\": {\n        \"breadth\": 340.0,\n        \"length\": 800.0\n      },\n      \"type\": \"coloured_block\"\n    }\n  ],\n  \"rover\": {\n    \"footprint_mm\": {\n      \"breadth\": 140.0,\n      \"length\": 180.0\n    },\n    \"pose\": {\n      \"heading_deg\": 180.0,\n      \"x_mm\": 450.0,\n      \"y_mm\": 1900.0\n    }\n  },\n  \"schema\": \"ai_learner_world_state\",\n  \"schema_version\": \"benchmark-1.0\"\n}",
+    "canonical_prompt_sha256": "9d40335293bcea1354996419e195abffa6790e3baeaebef57f0ae200f1c51cdb",
+    "transmitted_prompt_sha256": "1d4cc25512cdea2c820a9d85ce19099a23a0f9032d54999a2f835b79f860984a",
+    "cache_buster_nonce": "fc96f90d41d816db",
+    "world_state": {
+      "schema": "ai_learner_world_state",
+      "schema_version": "benchmark-1.0",
+      "coordinate_frame": {
+        "units": "mm",
+        "origin": "arena_bottom_left",
+        "x_axis": "right",
+        "y_axis": "up",
+        "heading": {
+          "0_deg": "+Y/up",
+          "90_deg": "+X/right",
+          "180_deg": "-Y/down",
+          "270_deg": "-X/left"
+        }
+      },
+      "arena": {
+        "width_mm": 2500.0,
+        "height_mm": 2500.0
+      },
+      "rover": {
+        "pose": {
+          "x_mm": 450.0,
+          "y_mm": 1900.0,
+          "heading_deg": 180.0
+        },
+        "footprint_mm": {
+          "length": 180.0,
+          "breadth": 140.0
+        }
+      },
+      "obstacles": [
+        {
+          "id": "red_block_01",
+          "type": "coloured_block",
+          "colour": "red",
+          "centre_mm": {
+            "x": 1250.0,
+            "y": 1350.0
+          },
+          "size_mm": {
+            "length": 800.0,
+            "breadth": 340.0
+          },
+          "orientation_deg": 90.0,
+          "polygon_mm": [
+            {
+              "x": 1650.0,
+              "y": 1180.0
+            },
+            {
+              "x": 1650.0,
+              "y": 1520.0
+            },
+            {
+              "x": 850.0,
+              "y": 1520.0
+            },
+            {
+              "x": 850.0,
+              "y": 1180.0
+            }
+          ]
+        }
+      ]
+    },
+    "user_instruction": "Drive to coordinate (2050 mm, 550 mm) while avoiding the red block and staying inside the arena.",
+    "hidden_goal_not_sent_to_model": {
+      "goal_type": "pose",
+      "target_x_mm": 2050.0,
+      "target_y_mm": 550.0,
+      "position_tolerance_mm": 70.0,
+      "require_heading": false,
+      "target_heading_deg": 0.0,
+      "heading_tolerance_deg": 15.0
+    }
+  },
+  "record": {
+    "benchmark_version": "phase4-pilot-1.0",
+    "timestamp_utc": "2026-09-28T00:47:32.030437+00:00",
+    "scenario_name": "SINGLE_05",
+    "scenario_path": "C:\\Users\\khonz\\OneDrive - University of Cape Town\\Final Year\\EEE4022S\\llm_tests\\dataset\\scenarios\\single_obstacle\\SINGLE_05.json",
+    "provider_key": "openai_fast",
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "mode": "structured",
+    "run_index": 250,
+    "prompt_sha256": "9d40335293bcea1354996419e195abffa6790e3baeaebef57f0ae200f1c51cdb",
+    "api_success": true,
+    "api_latency_ms": 1426.3044999970589,
+    "validation_latency_ms": 2.3901000022306107,
+    "plan_ready_latency_ms": 1428.6945999992895,
+    "json_parse_success": true,
+    "schema_valid": true,
+    "protocol_valid": true,
+    "simulation_executed": true,
+    "input_tokens": 851,
+    "output_tokens": 58,
+    "total_tokens": 909,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 0,
+    "estimated_cost_usd": 0.00011410000000000001,
+    "response_id": "resp_0e4b1254c22c6aa2006ab9b924747087d2b74cd0104e365346",
+    "finish_reason": "completed",
+    "error_type": null,
+    "error_message": null,
+    "raw_response": "{\"cmds\":[{\"op\":\"TURN\",\"value\":90},{\"op\":\"FWD\",\"value\":1550},{\"op\":\"TURN\",\"value\":90},{\"op\":\"FWD\",\"value\":1350},{\"op\":\"STOP\",\"value\":null}]}",
+    "parsed_plan": {
+      "cmds": [
+        {
+          "op": "TURN",
+          "value": 90.0
+        },
+        {
+          "op": "FWD",
+          "value": 1550.0
+        },
+        {
+          "op": "TURN",
+          "value": 90.0
+        },
+        {
+          "op": "FWD",
+          "value": 1350.0
+        },
+        {
+          "op": "STOP",
+          "value": null
+        }
+      ]
+    },
+    "wire_commands": [
+      [
+        "TURN",
+        90
+      ],
+      [
+        "FWD",
+        1550
+      ],
+      [
+        "TURN",
+        90
+      ],
+      [
+        "FWD",
+        1350
+      ],
+      [
+        "STOP"
+      ]
+    ],
+    "task_success": false,
+    "safe": false,
+    "collision": false,
+    "boundary_violation": true,
+    "stop_reached": false,
+    "final_x_mm": 90.0,
+    "final_y_mm": 1900.0,
+    "final_heading_deg": 270.0,
+    "position_error_mm": 2379.9369739554027,
+    "heading_error_deg": null,
+    "travel_distance_mm": 360.0,
+    "total_rotation_deg": 90.0,
+    "commands_executed": 2,
+    "job_id": "SINGLE_05__r2__openai_fast",
+    "scenario_family": "single_obstacle",
+    "scenario_difficulty": 3,
+    "scenario_title": "Offset red barrier",
+    "repetition_index": 2,
+    "execution_order": 250,
+    "cache_buster_nonce": "fc96f90d41d816db",
+    "transmitted_prompt_sha256": "1d4cc25512cdea2c820a9d85ce19099a23a0f9032d54999a2f835b79f860984a"
+  }
+}
