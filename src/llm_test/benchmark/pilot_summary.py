@@ -284,12 +284,20 @@ def generate_pilot_summary(
                 r.get("modal_plan_fraction")
                 for r in consistency_rows
             ),
+            "scenarios_all_repetitions_identical_rate": _rate(
+                r.get("all_repetitions_identical")
+                for r in consistency_rows
+            ),
             "scenarios_all_3_plans_identical_rate": _rate(
                 r.get("all_repetitions_identical")
                 for r in consistency_rows
             ),
             "scenarios_outcome_consistent_rate": _rate(
                 r.get("outcome_consistent")
+                for r in consistency_rows
+            ),
+            "scenarios_all_repetitions_successful_rate": _rate(
+                r.get("all_repetitions_successful")
                 for r in consistency_rows
             ),
             "scenarios_all_3_successful_rate": _rate(
@@ -358,6 +366,7 @@ def generate_pilot_summary(
         "cache_busting_enabled": session_plan[
             "cache_busting_enabled"
         ],
+        "repetitions_per_scenario": int(session_plan.get("repetitions_per_scenario", 3)),
         "planned_calls": len(session_plan["jobs"]),
         "completed_calls": len(records),
         "completion_rate": (
@@ -413,8 +422,9 @@ def _fmt_num(value, digits=1):
 
 
 def _write_markdown(path: Path, summary: dict) -> None:
+    repetitions = int(summary.get("repetitions_per_scenario", 3))
     lines = [
-        "# Phase 4 Pilot Summary",
+        "# Benchmark Summary",
         "",
         f"- Session: `{summary['session_id']}`",
         f"- Seed: `{summary['seed']}`",
@@ -423,7 +433,7 @@ def _write_markdown(path: Path, summary: dict) -> None:
         "",
         "## Model summary",
         "",
-        "| Model key | Task success | Protocol valid | Median latency (ms) | P90 (ms) | P95 (ms) | All 3 plans identical | Outcome consistent | Est. cost |",
+        f"| Model key | Task success | Protocol valid | Median latency (ms) | P90 (ms) | P95 (ms) | All {repetitions} plans identical | Outcome consistent | Est. cost |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
 
@@ -438,7 +448,10 @@ def _write_markdown(path: Path, summary: dict) -> None:
                 _fmt_num(row["p90_valid_plan_latency_ms"]),
                 _fmt_num(row["p95_valid_plan_latency_ms"]),
                 _fmt_pct(
-                    row["scenarios_all_3_plans_identical_rate"]
+                    row.get(
+                        "scenarios_all_repetitions_identical_rate",
+                        row["scenarios_all_3_plans_identical_rate"],
+                    )
                 ),
                 _fmt_pct(
                     row["scenarios_outcome_consistent_rate"]
@@ -458,8 +471,8 @@ def _write_markdown(path: Path, summary: dict) -> None:
         "",
         "- Task success is kept separate from schema/protocol validity.",
         "- Latency statistics use protocol-valid executable plans.",
-        "- 'All 3 plans identical' compares exact compiled wire-command sequences.",
-        "- Outcome consistency asks whether all three repetitions had the same success/failure outcome, even if the command plans differed.",
+        "- 'All repetitions identical' compares exact compiled wire-command sequences.",
+        f"- Outcome consistency asks whether all {repetitions} repetitions had the same success/failure outcome, even if the command plans differed.",
         "- Cost values are estimates from the rates frozen in `benchmark_config.json`.",
         "",
     ])

@@ -77,10 +77,19 @@ def generate_all_plots(session_dir: Path, output_dir: Path | None = None) -> dic
     output_dir.mkdir(parents=True, exist_ok=True)
     plots_dir.mkdir(parents=True, exist_ok=True)
 
-    model_rows = model_metrics(records)
+    expected_repetitions = 3
+    session_plan_path = session_dir / "session_plan.json"
+    if session_plan_path.exists():
+        try:
+            session_plan = json.loads(session_plan_path.read_text(encoding="utf-8"))
+            expected_repetitions = int(session_plan.get("repetitions_per_scenario", 3))
+        except Exception:
+            expected_repetitions = 3
+
+    model_rows = model_metrics(records, expected_repetitions=expected_repetitions)
     family_rows = family_metrics(records)
     diff_rows = difficulty_metrics(records)
-    consistency = consistency_rows(records)
+    consistency = consistency_rows(records, expected_repetitions=expected_repetitions)
     failure_rows = failure_mode_metrics(records)
 
     _write_csv(output_dir / "model_metrics.csv", model_rows)
@@ -98,7 +107,13 @@ def generate_all_plots(session_dir: Path, output_dir: Path | None = None) -> dic
     success = np.array([_pct(row["task_success_rate"]) for row in model_rows])
     ci_low = np.array([_pct(row["task_success_ci_low"]) for row in model_rows])
     ci_high = np.array([_pct(row["task_success_ci_high"]) for row in model_rows])
-    yerr = np.vstack([success - ci_low, ci_high - success])
+    # Floating-point roundoff at a perfect 0% or 100% success rate can
+    # produce a value such as -2.2e-14 for one side of the error bar.
+    # Matplotlib correctly rejects negative yerr values, so clamp numerical
+    # noise to zero.  This does not alter the statistical interval.
+    lower_err = np.maximum(0.0, success - ci_low)
+    upper_err = np.maximum(0.0, ci_high - success)
+    yerr = np.vstack([lower_err, upper_err])
     fig, ax = plt.subplots(figsize=(9, 5.4))
     bars = ax.bar(x, success, yerr=yerr, capsize=5)
     ax.set_title("Task success rate by model")
@@ -210,9 +225,15 @@ def generate_all_plots(session_dir: Path, output_dir: Path | None = None) -> dic
     # 09 repeatability
     fig, ax = plt.subplots(figsize=(10,5.7)); width = 0.23
     repeat_metrics = [
-        ("all_3_plans_identical_rate", "All 3 exact plans identical"),
+        (
+            "all_repetitions_identical_rate",
+            f"All {expected_repetitions} exact plans identical",
+        ),
         ("outcome_consistent_rate", "Same success/failure outcome"),
-        ("all_3_successful_rate", "All 3 repetitions successful"),
+        (
+            "all_repetitions_successful_rate",
+            f"All {expected_repetitions} repetitions successful",
+        ),
     ]
     for i, (key,label) in enumerate(repeat_metrics):
         vals = [_pct(row[key]) for row in model_rows]
@@ -292,7 +313,7 @@ def generate_all_plots(session_dir: Path, output_dir: Path | None = None) -> dic
         "plots_generated": [str(p.relative_to(session_dir)) for p in generated],
     }
     (output_dir / "analysis_manifest.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    _write_markdown_summary(output_dir / "ANALYSIS_SUMMARY.md", model_rows, len(records))
+    _write_markdown_summary(output_dir / "ANALYSIS_SUMMARY.md", model_rows, len(records), expected_repetitions)
     return summary
 
 
@@ -306,11 +327,11 @@ def _fmt_usd(value):
     return "n/a" if value is None else f"${value:.5f}"
 
 
-def _write_markdown_summary(path: Path, rows: list[dict], record_count: int) -> None:
+def _write_markdown_summary(path: Path, rows: list[dict], record_count: int, expected_repetitions: int) -> None:
     lines = [
-        "# Phase 4 comparison summary", "",
+        "# Benchmark comparison summary", "",
         f"Completed trials analysed: **{record_count}**", "",
-        "| Model | Success | Protocol valid | Median latency ms | P95 ms | Collision | All 3 plans identical | Outcome consistent | Cost/call | Cost/success |",
+        f"| Model | Success | Protocol valid | Median latency ms | P95 ms | Collision | All {expected_repetitions} plans identical | Outcome consistent | Cost/call | Cost/success |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in rows:
@@ -321,7 +342,7 @@ def _write_markdown_summary(path: Path, rows: list[dict], record_count: int) -> 
             _fmt_ms(row["median_latency_ms"]),
             _fmt_ms(row["p95_latency_ms"]),
             _fmt_pct(row["collision_rate_simulated"]),
-            _fmt_pct(row["all_3_plans_identical_rate"]),
+            _fmt_pct(row.get("all_repetitions_identical_rate", row["all_3_plans_identical_rate"])),
             _fmt_pct(row["outcome_consistent_rate"]),
             _fmt_usd(row["mean_cost_usd"]),
             _fmt_usd(row["cost_per_success_usd"]),

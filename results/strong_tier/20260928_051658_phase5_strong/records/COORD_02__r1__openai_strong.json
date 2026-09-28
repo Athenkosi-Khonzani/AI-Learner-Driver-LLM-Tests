@@ -1,0 +1,136 @@
+{
+  "request": {
+    "provider_key": "openai_strong",
+    "provider": "openai",
+    "model": "gpt-6-sol",
+    "mode": "structured",
+    "system_prompt": "BENCHMARK NONCE: ddb0aa96819ea7c3\nThis identifier has no task meaning. Ignore it completely when planning the rover motion.\n\nYou are the high-level motion planner for a rectangular mobile rover.\n\nYour only task is to convert the supplied natural-language instruction and world state into a short executable motion plan.\n\nCoordinate and command conventions:\n- World origin is the arena bottom-left.\n- +X points right.\n- +Y points up.\n- Heading 0 degrees points +Y/up.\n- Heading 90 degrees points +X/right.\n- TURN uses signed degrees: positive = turn right/clockwise, negative = turn left/anticlockwise.\n- FWD and BACK values are distances in millimetres.\n- The rover has a rectangular physical footprint. Plan for the full rover body, not only its centre.\n- Avoid every obstacle and keep the complete rover footprint inside the arena at all times.\n\nCommand limits:\n- Maximum 12 commands total.\n- TURN: 0 < absolute value <= 180 degrees.\n- FWD: 0 < value <= 2000 mm.\n- BACK: 0 < value <= 1000 mm.\n- STOP must be the final command and may appear only once.\n\nDo not use tools, web search, or outside knowledge.\nUse only the supplied instruction and world state.\nReturn only the requested command-plan structure. Do not include explanations.\n",
+    "user_prompt": "USER INSTRUCTION:\nDrive to coordinate (1500 mm, 900 mm) and stop there.\n\nWORLD STATE:\n{\n  \"arena\": {\n    \"height_mm\": 2500.0,\n    \"width_mm\": 2500.0\n  },\n  \"coordinate_frame\": {\n    \"heading\": {\n      \"0_deg\": \"+Y/up\",\n      \"180_deg\": \"-Y/down\",\n      \"270_deg\": \"-X/left\",\n      \"90_deg\": \"+X/right\"\n    },\n    \"origin\": \"arena_bottom_left\",\n    \"units\": \"mm\",\n    \"x_axis\": \"right\",\n    \"y_axis\": \"up\"\n  },\n  \"obstacles\": [],\n  \"rover\": {\n    \"footprint_mm\": {\n      \"breadth\": 140.0,\n      \"length\": 180.0\n    },\n    \"pose\": {\n      \"heading_deg\": 180.0,\n      \"x_mm\": 600.0,\n      \"y_mm\": 1800.0\n    }\n  },\n  \"schema\": \"ai_learner_world_state\",\n  \"schema_version\": \"benchmark-1.0\"\n}",
+    "canonical_prompt_sha256": "ce3e3cfe25bcf41e88068c51dc0f10fa62e5e9d5f1a228755187c0b60523a246",
+    "transmitted_prompt_sha256": "02daa7a42ccaa1d0a390f5f30aa82d8e6c30e2bd05867c631b17bdbf4db70f17",
+    "cache_buster_nonce": "ddb0aa96819ea7c3",
+    "world_state": {
+      "schema": "ai_learner_world_state",
+      "schema_version": "benchmark-1.0",
+      "coordinate_frame": {
+        "units": "mm",
+        "origin": "arena_bottom_left",
+        "x_axis": "right",
+        "y_axis": "up",
+        "heading": {
+          "0_deg": "+Y/up",
+          "90_deg": "+X/right",
+          "180_deg": "-Y/down",
+          "270_deg": "-X/left"
+        }
+      },
+      "arena": {
+        "width_mm": 2500.0,
+        "height_mm": 2500.0
+      },
+      "rover": {
+        "pose": {
+          "x_mm": 600.0,
+          "y_mm": 1800.0,
+          "heading_deg": 180.0
+        },
+        "footprint_mm": {
+          "length": 180.0,
+          "breadth": 140.0
+        }
+      },
+      "obstacles": []
+    },
+    "user_instruction": "Drive to coordinate (1500 mm, 900 mm) and stop there.",
+    "hidden_goal_not_sent_to_model": {
+      "goal_type": "pose",
+      "target_x_mm": 1500.0,
+      "target_y_mm": 900.0,
+      "position_tolerance_mm": 50.0,
+      "require_heading": false,
+      "target_heading_deg": 0.0,
+      "heading_tolerance_deg": 15.0
+    }
+  },
+  "record": {
+    "benchmark_version": "phase5-strong-tier-1.0",
+    "timestamp_utc": "2026-09-28T03:20:21.458780+00:00",
+    "scenario_name": "COORD_02",
+    "scenario_path": "C:\\Users\\khonz\\OneDrive - University of Cape Town\\Final Year\\EEE4022S\\llm_tests\\dataset\\scenarios\\coordinate_navigation\\COORD_02.json",
+    "provider_key": "openai_strong",
+    "provider": "openai",
+    "model": "gpt-6-sol",
+    "mode": "structured",
+    "run_index": 12,
+    "prompt_sha256": "ce3e3cfe25bcf41e88068c51dc0f10fa62e5e9d5f1a228755187c0b60523a246",
+    "api_success": true,
+    "api_latency_ms": 3841.9378000035067,
+    "validation_latency_ms": 1.633700005186256,
+    "plan_ready_latency_ms": 3843.571500008693,
+    "json_parse_success": true,
+    "schema_valid": true,
+    "protocol_valid": true,
+    "simulation_executed": true,
+    "input_tokens": 646,
+    "output_tokens": 97,
+    "total_tokens": 743,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 51,
+    "estimated_cost_usd": 0.002262,
+    "response_id": "resp_067808b45a0e01d4006ab9dcf1d78887d2abda2882d48ce635",
+    "finish_reason": "completed",
+    "error_type": null,
+    "error_message": null,
+    "raw_response": "{\"cmds\":[{\"op\":\"TURN\",\"value\":-45},{\"op\":\"FWD\",\"value\":1272.792206},{\"op\":\"STOP\",\"value\":null}]}",
+    "parsed_plan": {
+      "cmds": [
+        {
+          "op": "TURN",
+          "value": -45.0
+        },
+        {
+          "op": "FWD",
+          "value": 1272.792206
+        },
+        {
+          "op": "STOP",
+          "value": null
+        }
+      ]
+    },
+    "wire_commands": [
+      [
+        "TURN",
+        -45
+      ],
+      [
+        "FWD",
+        1272.792206
+      ],
+      [
+        "STOP"
+      ]
+    ],
+    "task_success": true,
+    "safe": true,
+    "collision": false,
+    "boundary_violation": false,
+    "stop_reached": true,
+    "final_x_mm": 1499.9999999039771,
+    "final_y_mm": 900.0000000960325,
+    "final_heading_deg": 135.0,
+    "position_error_mm": 1.358036627063285e-07,
+    "heading_error_deg": null,
+    "travel_distance_mm": 1272.792206,
+    "total_rotation_deg": 45.0,
+    "commands_executed": 3,
+    "job_id": "COORD_02__r1__openai_strong",
+    "scenario_family": "coordinate_navigation",
+    "scenario_difficulty": 2,
+    "scenario_title": "South-east coordinate",
+    "repetition_index": 1,
+    "execution_order": 12,
+    "cache_buster_nonce": "ddb0aa96819ea7c3",
+    "transmitted_prompt_sha256": "02daa7a42ccaa1d0a390f5f30aa82d8e6c30e2bd05867c631b17bdbf4db70f17"
+  }
+}

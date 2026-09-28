@@ -148,3 +148,24 @@ python verify_phase4_replays.py --session latest
 ```
 
 See `docs/PHASE4_VISUALISATION.md`.
+
+
+## Phase 5 - strong-tier benchmark
+
+Compare GPT-6 Sol, Claude Sonnet 5 and Gemini 3.1 Pro on the same frozen 30 scenarios, two repetitions each (180 calls total):
+
+```powershell
+python run_phase5_strong.py --dry-run
+python run_phase5_strong.py --resume-latest --limit 6
+python run_phase5_strong.py --resume-latest
+```
+
+Analysis and replay:
+
+```powershell
+python plot_phase5_results.py --session latest
+python replay_phase5_results.py --session latest
+python verify_phase5_replays.py --session latest
+```
+
+See `docs/PHASE5_STRONG_TIER.md`.

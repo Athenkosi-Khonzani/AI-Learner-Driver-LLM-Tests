@@ -1,0 +1,19 @@
+provider_key,provider_label,family,trials,task_success_rate,task_success_ci_low,task_success_ci_high,median_latency_ms,collision_rate_simulated
+anthropic_strong,Claude Sonnet 5,basic_motion,8,1.0,0.6755924351161198,1.0,2158.152149993839,0.0
+anthropic_strong,Claude Sonnet 5,coordinate_navigation,8,1.0,0.6755924351161198,1.0,4496.590899998409,0.0
+anthropic_strong,Claude Sonnet 5,multi_obstacle,12,0.9166666666666666,0.646120088858883,0.9851349055950829,11883.39514999825,0.08333333333333333
+anthropic_strong,Claude Sonnet 5,object_target,10,1.0,0.7224672001371107,1.0,11787.222750001092,0.0
+anthropic_strong,Claude Sonnet 5,single_obstacle,10,1.0,0.7224672001371107,1.0,9210.975450005208,0.0
+anthropic_strong,Claude Sonnet 5,tight_boundary,12,1.0,0.7575059933447592,1.0,6677.999200001068,0.0
+gemini_strong,Gemini 3.1 Pro,basic_motion,8,1.0,0.6755924351161198,1.0,3564.909950000583,0.0
+gemini_strong,Gemini 3.1 Pro,coordinate_navigation,8,1.0,0.6755924351161198,1.0,6785.966349998489,0.0
+gemini_strong,Gemini 3.1 Pro,multi_obstacle,12,0.9166666666666666,0.646120088858883,0.9851349055950829,10299.971500000538,0.08333333333333333
+gemini_strong,Gemini 3.1 Pro,object_target,10,1.0,0.7224672001371107,1.0,9131.189650001033,0.0
+gemini_strong,Gemini 3.1 Pro,single_obstacle,10,1.0,0.7224672001371107,1.0,7672.000399998069,0.0
+gemini_strong,Gemini 3.1 Pro,tight_boundary,12,1.0,0.7575059933447592,1.0,6988.143150003452,0.0
+openai_strong,GPT-6 Sol,basic_motion,8,1.0,0.6755924351161198,1.0,1723.4834000009869,0.0
+openai_strong,GPT-6 Sol,coordinate_navigation,8,1.0,0.6755924351161198,1.0,3244.3853500008117,0.0
+openai_strong,GPT-6 Sol,multi_obstacle,12,1.0,0.7575059933447592,1.0,4886.471499998152,0.0
+openai_strong,GPT-6 Sol,object_target,10,1.0,0.7224672001371107,1.0,4626.955550000275,0.0
+openai_strong,GPT-6 Sol,single_obstacle,10,1.0,0.7224672001371107,1.0,5508.129400004691,0.0
+openai_strong,GPT-6 Sol,tight_boundary,12,1.0,0.7575059933447592,1.0,3816.1071999966225,0.0

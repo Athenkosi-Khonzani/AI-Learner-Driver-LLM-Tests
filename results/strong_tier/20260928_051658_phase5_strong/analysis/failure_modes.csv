@@ -1,0 +1,4 @@
+provider_key,provider_label,trials,Success,Goal miss,Collision,Boundary violation,Protocol failure,Schema failure,API failure,Other
+anthropic_strong,Claude Sonnet 5,60,0.9833333333333333,0.0,0.016666666666666666,0.0,0.0,0.0,0.0,0.0
+gemini_strong,Gemini 3.1 Pro,60,0.9833333333333333,0.0,0.016666666666666666,0.0,0.0,0.0,0.0,0.0
+openai_strong,GPT-6 Sol,60,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

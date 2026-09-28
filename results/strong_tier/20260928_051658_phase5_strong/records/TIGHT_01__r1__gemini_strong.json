@@ -1,0 +1,144 @@
+{
+  "request": {
+    "provider_key": "gemini_strong",
+    "provider": "gemini",
+    "model": "gemini-3.1-pro-preview",
+    "mode": "structured",
+    "system_prompt": "BENCHMARK NONCE: 7835b639f15d7d09\nThis identifier has no task meaning. Ignore it completely when planning the rover motion.\n\nYou are the high-level motion planner for a rectangular mobile rover.\n\nYour only task is to convert the supplied natural-language instruction and world state into a short executable motion plan.\n\nCoordinate and command conventions:\n- World origin is the arena bottom-left.\n- +X points right.\n- +Y points up.\n- Heading 0 degrees points +Y/up.\n- Heading 90 degrees points +X/right.\n- TURN uses signed degrees: positive = turn right/clockwise, negative = turn left/anticlockwise.\n- FWD and BACK values are distances in millimetres.\n- The rover has a rectangular physical footprint. Plan for the full rover body, not only its centre.\n- Avoid every obstacle and keep the complete rover footprint inside the arena at all times.\n\nCommand limits:\n- Maximum 12 commands total.\n- TURN: 0 < absolute value <= 180 degrees.\n- FWD: 0 < value <= 2000 mm.\n- BACK: 0 < value <= 1000 mm.\n- STOP must be the final command and may appear only once.\n\nDo not use tools, web search, or outside knowledge.\nUse only the supplied instruction and world state.\nReturn only the requested command-plan structure. Do not include explanations.\n",
+    "user_prompt": "USER INSTRUCTION:\nDrive to coordinate (250 mm, 1600 mm) and stop without any part of the rover leaving the arena.\n\nWORLD STATE:\n{\n  \"arena\": {\n    \"height_mm\": 2500.0,\n    \"width_mm\": 2500.0\n  },\n  \"coordinate_frame\": {\n    \"heading\": {\n      \"0_deg\": \"+Y/up\",\n      \"180_deg\": \"-Y/down\",\n      \"270_deg\": \"-X/left\",\n      \"90_deg\": \"+X/right\"\n    },\n    \"origin\": \"arena_bottom_left\",\n    \"units\": \"mm\",\n    \"x_axis\": \"right\",\n    \"y_axis\": \"up\"\n  },\n  \"obstacles\": [],\n  \"rover\": {\n    \"footprint_mm\": {\n      \"breadth\": 140.0,\n      \"length\": 180.0\n    },\n    \"pose\": {\n      \"heading_deg\": 270.0,\n      \"x_mm\": 1700.0,\n      \"y_mm\": 500.0\n    }\n  },\n  \"schema\": \"ai_learner_world_state\",\n  \"schema_version\": \"benchmark-1.0\"\n}",
+    "canonical_prompt_sha256": "4ef1e1cfbaefa1b3e6714a95eabffbc6d6ade9a68efce06ba4f6f5dcda1abeda",
+    "transmitted_prompt_sha256": "b8d001435428367b08c5e2db46dbe2adefad6dbcbfa3c4bde130ee6df3b4c754",
+    "cache_buster_nonce": "7835b639f15d7d09",
+    "world_state": {
+      "schema": "ai_learner_world_state",
+      "schema_version": "benchmark-1.0",
+      "coordinate_frame": {
+        "units": "mm",
+        "origin": "arena_bottom_left",
+        "x_axis": "right",
+        "y_axis": "up",
+        "heading": {
+          "0_deg": "+Y/up",
+          "90_deg": "+X/right",
+          "180_deg": "-Y/down",
+          "270_deg": "-X/left"
+        }
+      },
+      "arena": {
+        "width_mm": 2500.0,
+        "height_mm": 2500.0
+      },
+      "rover": {
+        "pose": {
+          "x_mm": 1700.0,
+          "y_mm": 500.0,
+          "heading_deg": 270.0
+        },
+        "footprint_mm": {
+          "length": 180.0,
+          "breadth": 140.0
+        }
+      },
+      "obstacles": []
+    },
+    "user_instruction": "Drive to coordinate (250 mm, 1600 mm) and stop without any part of the rover leaving the arena.",
+    "hidden_goal_not_sent_to_model": {
+      "goal_type": "pose",
+      "target_x_mm": 250.0,
+      "target_y_mm": 1600.0,
+      "position_tolerance_mm": 50.0,
+      "require_heading": false,
+      "target_heading_deg": 0.0,
+      "heading_tolerance_deg": 15.0
+    }
+  },
+  "record": {
+    "benchmark_version": "phase5-strong-tier-1.0",
+    "timestamp_utc": "2026-09-28T03:36:35.251373+00:00",
+    "scenario_name": "TIGHT_01",
+    "scenario_path": "C:\\Users\\khonz\\OneDrive - University of Cape Town\\Final Year\\EEE4022S\\llm_tests\\dataset\\scenarios\\tight_boundary\\TIGHT_01.json",
+    "provider_key": "gemini_strong",
+    "provider": "gemini",
+    "model": "gemini-3.1-pro-preview",
+    "mode": "structured",
+    "run_index": 88,
+    "prompt_sha256": "4ef1e1cfbaefa1b3e6714a95eabffbc6d6ade9a68efce06ba4f6f5dcda1abeda",
+    "api_success": true,
+    "api_latency_ms": 7211.2933000025805,
+    "validation_latency_ms": 3.076800006965641,
+    "plan_ready_latency_ms": 7214.370100009546,
+    "json_parse_success": true,
+    "schema_valid": true,
+    "protocol_valid": true,
+    "simulation_executed": true,
+    "input_tokens": 650,
+    "output_tokens": 44,
+    "total_tokens": 1422,
+    "cached_input_tokens": null,
+    "reasoning_tokens": 728,
+    "estimated_cost_usd": 0.001828,
+    "response_id": "vOC5aurYGuHBxN8Pou_iyQo",
+    "finish_reason": "STOP",
+    "error_type": null,
+    "error_message": null,
+    "raw_response": "{\"cmds\":[{\"op\":\"FWD\",\"value\":1450},{\"op\":\"TURN\",\"value\":90},{\"op\":\"FWD\",\"value\":1100},{\"op\":\"STOP\",\"value\":null}]}",
+    "parsed_plan": {
+      "cmds": [
+        {
+          "op": "FWD",
+          "value": 1450.0
+        },
+        {
+          "op": "TURN",
+          "value": 90.0
+        },
+        {
+          "op": "FWD",
+          "value": 1100.0
+        },
+        {
+          "op": "STOP",
+          "value": null
+        }
+      ]
+    },
+    "wire_commands": [
+      [
+        "FWD",
+        1450
+      ],
+      [
+        "TURN",
+        90
+      ],
+      [
+        "FWD",
+        1100
+      ],
+      [
+        "STOP"
+      ]
+    ],
+    "task_success": true,
+    "safe": true,
+    "collision": false,
+    "boundary_violation": false,
+    "stop_reached": true,
+    "final_x_mm": 250.0,
+    "final_y_mm": 1600.0,
+    "final_heading_deg": 0.0,
+    "position_error_mm": 0.0,
+    "heading_error_deg": null,
+    "travel_distance_mm": 2550.0,
+    "total_rotation_deg": 90.0,
+    "commands_executed": 4,
+    "job_id": "TIGHT_01__r1__gemini_strong",
+    "scenario_family": "tight_boundary",
+    "scenario_difficulty": 2,
+    "scenario_title": "Near left boundary target",
+    "repetition_index": 1,
+    "execution_order": 88,
+    "cache_buster_nonce": "7835b639f15d7d09",
+    "transmitted_prompt_sha256": "b8d001435428367b08c5e2db46dbe2adefad6dbcbfa3c4bde130ee6df3b4c754"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "session_id": "20260928_051658_phase5_strong",
+  "updated_utc": "2026-09-28T03:57:24.138369+00:00",
+  "planned_calls": 180,
+  "completed_calls": 180,
+  "remaining_calls": 0,
+  "completion_fraction": 1.0,
+  "planned_by_provider": {
+    "anthropic_strong": 60,
+    "gemini_strong": 60,
+    "openai_strong": 60
+  },
+  "completed_by_provider": {
+    "anthropic_strong": 60,
+    "gemini_strong": 60,
+    "openai_strong": 60
+  }
+}

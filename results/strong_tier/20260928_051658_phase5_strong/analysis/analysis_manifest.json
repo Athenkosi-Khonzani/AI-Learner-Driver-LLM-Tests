@@ -1,0 +1,20 @@
+{
+  "session": "20260928_051658_phase5_strong",
+  "records_analyzed": 180,
+  "plots_generated": [
+    "analysis\\plots\\01_task_success_rate.png",
+    "analysis\\plots\\02_plan_ready_latency.png",
+    "analysis\\plots\\03_pipeline_reliability.png",
+    "analysis\\plots\\04_safety_failures.png",
+    "analysis\\plots\\05_success_by_family.png",
+    "analysis\\plots\\06_success_by_difficulty.png",
+    "analysis\\plots\\07_position_error.png",
+    "analysis\\plots\\08_cost_comparison.png",
+    "analysis\\plots\\09_repeatability.png",
+    "analysis\\plots\\10_command_count.png",
+    "analysis\\plots\\11_travel_distance.png",
+    "analysis\\plots\\12_total_rotation.png",
+    "analysis\\plots\\13_failure_mode_distribution.png",
+    "analysis\\plots\\14_reported_cache_observation.png"
+  ]
+}

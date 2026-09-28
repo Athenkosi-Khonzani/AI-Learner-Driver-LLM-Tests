@@ -1,0 +1,33 @@
+{
+  "pilot_version": "phase5-strong-tier-1.0",
+  "mode": "structured",
+  "repetitions_per_scenario": 2,
+  "providers": [
+    "openai_strong",
+    "anthropic_strong",
+    "gemini_strong"
+  ],
+  "cache_busting": {
+    "enabled": true,
+    "strategy": "semantic_invariant_nonce_prefix",
+    "description": "Each scenario/repetition gets one neutral nonce shared by all three providers. Task semantics are unchanged."
+  },
+  "scheduling": {
+    "randomize_scenario_repetition_order": true,
+    "randomize_provider_order_within_repetition": true,
+    "delay_min_seconds": 4.0,
+    "delay_max_seconds": 7.0,
+    "cooldown_every_calls": 30,
+    "cooldown_min_seconds": 20.0,
+    "cooldown_max_seconds": 30.0,
+    "parallel_calls": 1
+  },
+  "data_collection": {
+    "planned_scenarios": 30,
+    "planned_runs_per_model_per_scenario": 2,
+    "planned_calls_total": 180,
+    "planned_calls_per_model": 60,
+    "auto_retry_api_failures": false,
+    "reason": "Failures remain experimental outcomes; no automatic retry."
+  }
+}

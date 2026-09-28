@@ -13,6 +13,9 @@ PROVIDER_LABELS = {
     "anthropic_fast": "Claude Haiku",
     "gemini_fast": "Gemini Flash-Lite",
     "anthropic_baseline": "Claude Sonnet",
+    "openai_strong": "GPT-6 Sol",
+    "anthropic_strong": "Claude Sonnet 5",
+    "gemini_strong": "Gemini 3.1 Pro",
 }
 
 
@@ -20,21 +23,21 @@ def provider_label(key: str) -> str:
     return PROVIDER_LABELS.get(key, key)
 
 
-def resolve_session_dir(project_root: Path, session: str) -> Path:
-    pilot_root = project_root / "results" / "pilot"
+def resolve_session_dir(project_root: Path, session: str, group: str = "pilot") -> Path:
+    session_root = project_root / "results" / group
     if session != "latest":
-        path = pilot_root / session
+        path = session_root / session
         if not path.exists():
-            raise FileNotFoundError(f"Phase 4 session not found: {path}")
+            raise FileNotFoundError(f"Benchmark session not found: {path}")
         return path
-    if not pilot_root.exists():
-        raise FileNotFoundError("No results/pilot directory exists yet.")
+    if not session_root.exists():
+        raise FileNotFoundError(f"No results/{group} directory exists yet.")
     candidates = [
-        p for p in pilot_root.iterdir()
+        p for p in session_root.iterdir()
         if p.is_dir() and (p / "session_plan.json").exists()
     ]
     if not candidates:
-        raise FileNotFoundError("No Phase 4 sessions were found.")
+        raise FileNotFoundError(f"No benchmark sessions were found under results/{group}.")
     return sorted(candidates, key=lambda p: p.name)[-1]
 
 
@@ -80,14 +83,34 @@ def proportion(successes: int, total: int) -> float | None:
 
 
 def wilson_interval(successes: int, total: int, z: float = 1.959963984540054) -> tuple[float | None, float | None]:
+    """Return a numerically robust Wilson score interval.
+
+    At an observed rate of exactly 0 or 1, floating-point roundoff can make
+    the computed endpoint differ from the observed rate by ~1e-16.  That is
+    statistically irrelevant but matplotlib rejects the resulting tiny
+    negative error-bar length.  Clamp the interval so it always contains the
+    observed proportion.
+    """
     if total <= 0:
         return None, None
+
     p = successes / total
     z2 = z * z
     denom = 1.0 + z2 / total
     centre = (p + z2 / (2.0 * total)) / denom
-    half = z * math.sqrt(p * (1.0 - p) / total + z2 / (4.0 * total * total)) / denom
-    return max(0.0, centre - half), min(1.0, centre + half)
+    half = z * math.sqrt(
+        p * (1.0 - p) / total
+        + z2 / (4.0 * total * total)
+    ) / denom
+
+    low = max(0.0, centre - half)
+    high = min(1.0, centre + half)
+
+    # Numerical safety: the CI must contain the observed proportion.
+    low = min(low, p)
+    high = max(high, p)
+
+    return low, high
 
 
 def exact_plan_key(record: dict[str, Any]) -> str | None:
@@ -208,8 +231,13 @@ def model_metrics(records: list[dict[str, Any]], expected_repetitions: int = 3) 
             "total_cost_usd": sum(costs) if costs else None,
             "cost_per_success_usd": (sum(costs) / task_success if costs and task_success > 0 else None),
             "mean_modal_plan_fraction": mean(r.get("modal_plan_fraction") for r in crows),
-            "all_3_plans_identical_rate": bool_rate("all_repetitions_identical"),
+            # Generic names are correct for both Phase 4 (3 repeats) and
+            # Phase 5 (2 repeats).  Legacy all_3_* aliases are retained so
+            # older analysis code continues to work.
+            "all_repetitions_identical_rate": bool_rate("all_repetitions_identical"),
             "outcome_consistent_rate": bool_rate("outcome_consistent"),
+            "all_repetitions_successful_rate": bool_rate("all_repetitions_successful"),
+            "all_3_plans_identical_rate": bool_rate("all_repetitions_identical"),
             "all_3_successful_rate": bool_rate("all_repetitions_successful"),
             "reported_cache_hit_rate": cache_hit_rate,
             "mean_reported_cached_tokens": mean(r.get("cached_input_tokens") for r in cache_reported_rows),

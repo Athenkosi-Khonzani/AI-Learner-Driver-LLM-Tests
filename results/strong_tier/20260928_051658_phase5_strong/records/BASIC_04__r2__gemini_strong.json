@@ -1,0 +1,128 @@
+{
+  "request": {
+    "provider_key": "gemini_strong",
+    "provider": "gemini",
+    "model": "gemini-3.1-pro-preview",
+    "mode": "structured",
+    "system_prompt": "BENCHMARK NONCE: 4a15d0887afceb37\nThis identifier has no task meaning. Ignore it completely when planning the rover motion.\n\nYou are the high-level motion planner for a rectangular mobile rover.\n\nYour only task is to convert the supplied natural-language instruction and world state into a short executable motion plan.\n\nCoordinate and command conventions:\n- World origin is the arena bottom-left.\n- +X points right.\n- +Y points up.\n- Heading 0 degrees points +Y/up.\n- Heading 90 degrees points +X/right.\n- TURN uses signed degrees: positive = turn right/clockwise, negative = turn left/anticlockwise.\n- FWD and BACK values are distances in millimetres.\n- The rover has a rectangular physical footprint. Plan for the full rover body, not only its centre.\n- Avoid every obstacle and keep the complete rover footprint inside the arena at all times.\n\nCommand limits:\n- Maximum 12 commands total.\n- TURN: 0 < absolute value <= 180 degrees.\n- FWD: 0 < value <= 2000 mm.\n- BACK: 0 < value <= 1000 mm.\n- STOP must be the final command and may appear only once.\n\nDo not use tools, web search, or outside knowledge.\nUse only the supplied instruction and world state.\nReturn only the requested command-plan structure. Do not include explanations.\n",
+    "user_prompt": "USER INSTRUCTION:\nReverse 300 mm without turning, then stop.\n\nWORLD STATE:\n{\n  \"arena\": {\n    \"height_mm\": 2500.0,\n    \"width_mm\": 2500.0\n  },\n  \"coordinate_frame\": {\n    \"heading\": {\n      \"0_deg\": \"+Y/up\",\n      \"180_deg\": \"-Y/down\",\n      \"270_deg\": \"-X/left\",\n      \"90_deg\": \"+X/right\"\n    },\n    \"origin\": \"arena_bottom_left\",\n    \"units\": \"mm\",\n    \"x_axis\": \"right\",\n    \"y_axis\": \"up\"\n  },\n  \"obstacles\": [],\n  \"rover\": {\n    \"footprint_mm\": {\n      \"breadth\": 140.0,\n      \"length\": 180.0\n    },\n    \"pose\": {\n      \"heading_deg\": 0.0,\n      \"x_mm\": 1200.0,\n      \"y_mm\": 1300.0\n    }\n  },\n  \"schema\": \"ai_learner_world_state\",\n  \"schema_version\": \"benchmark-1.0\"\n}",
+    "canonical_prompt_sha256": "b04e7f231994045b8b837bc4632e3e8725e6c2f767ada24f7c4f85228f3a5bbd",
+    "transmitted_prompt_sha256": "28c6bc82440e9f4e11f1d49f8ac3893f71e32f315aac2b2a973ab30cccfc1e30",
+    "cache_buster_nonce": "4a15d0887afceb37",
+    "world_state": {
+      "schema": "ai_learner_world_state",
+      "schema_version": "benchmark-1.0",
+      "coordinate_frame": {
+        "units": "mm",
+        "origin": "arena_bottom_left",
+        "x_axis": "right",
+        "y_axis": "up",
+        "heading": {
+          "0_deg": "+Y/up",
+          "90_deg": "+X/right",
+          "180_deg": "-Y/down",
+          "270_deg": "-X/left"
+        }
+      },
+      "arena": {
+        "width_mm": 2500.0,
+        "height_mm": 2500.0
+      },
+      "rover": {
+        "pose": {
+          "x_mm": 1200.0,
+          "y_mm": 1300.0,
+          "heading_deg": 0.0
+        },
+        "footprint_mm": {
+          "length": 180.0,
+          "breadth": 140.0
+        }
+      },
+      "obstacles": []
+    },
+    "user_instruction": "Reverse 300 mm without turning, then stop.",
+    "hidden_goal_not_sent_to_model": {
+      "goal_type": "pose",
+      "target_x_mm": 1200.0,
+      "target_y_mm": 1000.0,
+      "position_tolerance_mm": 25.0,
+      "require_heading": true,
+      "target_heading_deg": 0.0,
+      "heading_tolerance_deg": 5.0
+    }
+  },
+  "record": {
+    "benchmark_version": "phase5-strong-tier-1.0",
+    "timestamp_utc": "2026-09-28T03:45:27.014768+00:00",
+    "scenario_name": "BASIC_04",
+    "scenario_path": "C:\\Users\\khonz\\OneDrive - University of Cape Town\\Final Year\\EEE4022S\\llm_tests\\dataset\\scenarios\\basic_motion\\BASIC_04.json",
+    "provider_key": "gemini_strong",
+    "provider": "gemini",
+    "model": "gemini-3.1-pro-preview",
+    "mode": "structured",
+    "run_index": 125,
+    "prompt_sha256": "b04e7f231994045b8b837bc4632e3e8725e6c2f767ada24f7c4f85228f3a5bbd",
+    "api_success": true,
+    "api_latency_ms": 3260.192100002314,
+    "validation_latency_ms": 0.41790000250330195,
+    "plan_ready_latency_ms": 3260.6100000048173,
+    "json_parse_success": true,
+    "schema_valid": true,
+    "protocol_valid": true,
+    "simulation_executed": true,
+    "input_tokens": 631,
+    "output_tokens": 55,
+    "total_tokens": 835,
+    "cached_input_tokens": null,
+    "reasoning_tokens": 149,
+    "estimated_cost_usd": 0.001922,
+    "response_id": "1OK5apWyCuTrnsEPjY6SoAw",
+    "finish_reason": "STOP",
+    "error_type": null,
+    "error_message": null,
+    "raw_response": "{\n  \"cmds\": [\n    {\n      \"op\": \"BACK\",\n      \"value\": 300\n    },\n    {\n      \"op\": \"STOP\",\n      \"value\": null\n    }\n  ]\n}",
+    "parsed_plan": {
+      "cmds": [
+        {
+          "op": "BACK",
+          "value": 300.0
+        },
+        {
+          "op": "STOP",
+          "value": null
+        }
+      ]
+    },
+    "wire_commands": [
+      [
+        "BACK",
+        300
+      ],
+      [
+        "STOP"
+      ]
+    ],
+    "task_success": true,
+    "safe": true,
+    "collision": false,
+    "boundary_violation": false,
+    "stop_reached": true,
+    "final_x_mm": 1200.0,
+    "final_y_mm": 1000.0,
+    "final_heading_deg": 0.0,
+    "position_error_mm": 0.0,
+    "heading_error_deg": 0.0,
+    "travel_distance_mm": 300.0,
+    "total_rotation_deg": 0.0,
+    "commands_executed": 2,
+    "job_id": "BASIC_04__r2__gemini_strong",
+    "scenario_family": "basic_motion",
+    "scenario_difficulty": 1,
+    "scenario_title": "Reverse motion",
+    "repetition_index": 2,
+    "execution_order": 125,
+    "cache_buster_nonce": "4a15d0887afceb37",
+    "transmitted_prompt_sha256": "28c6bc82440e9f4e11f1d49f8ac3893f71e32f315aac2b2a973ab30cccfc1e30"
+  }
+}

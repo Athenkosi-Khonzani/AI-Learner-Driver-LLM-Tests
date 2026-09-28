@@ -1,0 +1,10 @@
+provider_key,difficulty,calls,task_success_rate,collision_rate_among_simulated,median_valid_plan_latency_ms
+anthropic_strong,1,14,1.0,0.0,2411.4078000020527
+anthropic_strong,2,28,1.0,0.0,6815.938050007389
+anthropic_strong,3,18,0.9444444444444444,0.05555555555555555,9687.052399996901
+gemini_strong,1,14,1.0,0.0,5353.447850000521
+gemini_strong,2,28,1.0,0.0,7692.189499994129
+gemini_strong,3,18,0.9444444444444444,0.05555555555555555,8529.07525000046
+openai_strong,1,14,1.0,0.0,2070.984200003295
+openai_strong,2,28,1.0,0.0,4002.0729999923788
+openai_strong,3,18,1.0,0.0,4886.471499998152
